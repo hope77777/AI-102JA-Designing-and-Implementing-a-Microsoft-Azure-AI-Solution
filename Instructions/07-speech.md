@@ -13,7 +13,7 @@ lab:
 
 この演習では、これらの API の両方を使用して、スピーキング クロック アプリケーションを実装します。
 
-    > **注**: この演習では、マイクとスピーカー/ヘッドフォンを備えたコンピューターを使用している必要があります。
+> **注**: この演習では、マイクとスピーカー/ヘッドフォンを備えたコンピューターを使用している必要があります。
 
 ## このコースのリポジトリを複製する
 
@@ -45,7 +45,7 @@ lab:
 
 この演習では、Speech SDK を使用して音声を認識および合成する、部分的に実装されたクライアント アプリケーションを完成させます。
 
-    > **注**: **C#** または **Python** 用の SDK のいずれかに使用することを選択できます。以下の手順で、希望する言語に適したアクションを実行します。
+> **注**: **C#** または **Python** 用の SDK のいずれかに使用することを選択できます。以下の手順で、希望する言語に適したアクションを実行します。
 
 1. Visual Studio Code の**エクスプローラー** ペインで、**07-speech** フォルダーを参照し、言語の設定に応じて **C-Sharp** または **Python** フォルダーを展開します。
 2. **speaking-clock** フォルダーを右クリックして、統合ターミナルを開きます。次に、言語設定に適したコマンドを実行して、Speech SDK パッケージをインストールします。
@@ -72,7 +72,7 @@ lab:
     - **C#**: Program.cs
     - **Python**: speaking-clock&period;py
 
-    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」**というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
+    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」** というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
 
     **C#**
     
@@ -89,7 +89,7 @@ lab:
     import azure.cognitiveservices.speech as speech_sdk
     ```
 
-5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。Cognitive Servicesリソースの **SpeechConfig** を作成するには、これらの変数を使用する必要があります。コメント**「Configure speech service」**の下に次のコードを追加します。
+5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。Cognitive Servicesリソースの **SpeechConfig** を作成するには、これらの変数を使用する必要があります。コメント **「Configure speech service」** の下に次のコードを追加します。
 
     **C#**
     
@@ -128,7 +128,7 @@ lab:
 Cognitive Services リソースに音声サービス用の **SpeechConfig** ができたので、**Speech-to-text** API を使用して音声を認識し、テキストに転写することができます。
 
 1. プログラムの **Main** 関数で、コードが **TranscribeCommand** 関数を使用して音声入力を受け入れることに注意してください。
-2. **TranscribeCommand** 関数のコメント**「Configure speech recognition」**の下に、次のコードを追加して、入力用のデフォルトのシステムマイクを使用して音声を認識および転写するために使用できる **SpeechRecognizer** クライアントを作成します。
+2. **TranscribeCommand** 関数のコメント **「Configure speech recognition」** の下に、次のコードを追加して、入力用のデフォルトのシステムマイクを使用して音声を認識および転写するために使用できる **SpeechRecognizer** クライアントを作成します。
 
     **C#**
     
@@ -148,7 +148,7 @@ Cognitive Services リソースに音声サービス用の **SpeechConfig** が�
     
     > **注**: ***AudioConfig** オブジェクトを変更してファイルパスを参照することにより、音声ファイルからの音声入力を認識することもできます。*
 
-3. **TranscribeCommand** 関数のコメント**「Process speech input」**の下に、音声入力をリッスンする次のコードを追加します。コマンドを返す関数の最後にあるコードを置き換えないように注意してください
+3. **TranscribeCommand** 関数のコメント **「Process speech input」** の下に、音声入力をリッスンする次のコードを追加します。コマンドを返す関数の最後にあるコードを置き換えないように注意してください
 
     **C#**
     
@@ -215,7 +215,7 @@ Cognitive Services リソースに音声サービス用の **SpeechConfig** が�
 speaking clock アプリケーションは話し言葉の入力を受け入れますが、実際には話しません。音声合成用のコードを追加して修正しましょう。
 
 1. プログラムの **Main** 関数で、コードが **TellTime** 関数を使用してユーザーに現在の時刻を通知することに注意してください。
-2. **TellTime**関数のコメント**「Configure speech synthesis」**の下に、次のコードを追加して、音声出力の生成に使用できる **SpeechSynthesizer** クライアントを作成します。
+2. **TellTime**関数のコメント **「Configure speech synthesis」** の下に、次のコードを追加して、音声出力の生成に使用できる **SpeechSynthesizer** クライアントを作成します。
 
     **C#**
     
@@ -233,7 +233,7 @@ speaking clock アプリケーションは話し言葉の入力を受け入れ�
     
     > **注**: *デフォルトのオーディオ構成では、出力にデフォルトのシステム オーディオ デバイスが使用されるため、**AudioConfig** を明示的に指定する必要はありません。オーディオ出力をファイルにリダイレクトする必要がある場合は、ファイルパスを指定して **AudioConfig** を使用できます。*
 
-3. **TellTime** 関数のコメント**「Synthesize spoken output」**の下に、次のコードを追加して音声出力を生成します。応答を出力する関数の最後にあるコードを置き換えないように注意してください。
+3. **TellTime** 関数のコメント **「Synthesize spoken output」** の下に、次のコードを追加して音声出力を生成します。応答を出力する関数の最後にあるコードを置き換えないように注意してください。
 
     **C#**
     
@@ -275,9 +275,9 @@ speaking clock アプリケーションは話し言葉の入力を受け入れ�
 
 speaking clock アプリケーションは、変更可能なデフォルトの音声を使用します。Speech サービスは、さまざまな*標準*音声だけでなく、より人間らしい*ニューラル*音声もサポートします。*カスタム* ボイスを作成することもできます。
 
-    > **注**: ニューラル音声と標準音声のリストについては、Speech サービスのドキュメントの[言語と音声のサポート](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#text-    to-speech)を参照してください。  標準音声、ニューラル音声、およびカスタム音声の可用性は地域によって異なります。詳細については、[音声サービスでサポートされている地域] (https://docs.microsoft.com/azure/cognitive-services/speech-service/regions#standard-and-neural-voices) を参照してください。
+> **注**: ニューラル音声と標準音声のリストについては、Speech サービスのドキュメントの[言語と音声のサポート](https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#text-    to-speech)を参照してください。  標準音声、ニューラル音声、およびカスタム音声の可用性は地域によって異なります。詳細については、[音声サービスでサポートされている地域] (https://docs.microsoft.com/azure/cognitive-services/speech-service/regions#standard-and-neural-voices) を参照してください。
 
-1. **TellTime** 関数のコメント**「Configure speech synthesis」**で、**SpeechSynthesizer** クライアントを作成する前に、次のようにコードを変更して代替音声を指定します。
+1. **TellTime** 関数のコメント **「Configure speech synthesis」** で、**SpeechSynthesizer** クライアントを作成する前に、次のようにコードを変更して代替音声を指定します。
 
    **C#**
 
@@ -315,7 +315,7 @@ speaking clock アプリケーションは、変更可能なデフォルトの�
 
 音声合成アップ言語 (SSML) を使用すると、XML ベースの形式を使用して音声を合成する方法をカスタマイズできます。
 
-1. **TellTime** 関数で、コメント**「Synthesize spoken output」**の下にある現在のすべてのコードを次のコードに置き換えます (コメント **Print the response** の下にコードを残します)。
+1. **TellTime** 関数で、コメント **「Synthesize spoken output」** の下にある現在のすべてのコードを次のコードに置き換えます (コメント **Print the response** の下にコードを残します)。
 
    **C#**
 

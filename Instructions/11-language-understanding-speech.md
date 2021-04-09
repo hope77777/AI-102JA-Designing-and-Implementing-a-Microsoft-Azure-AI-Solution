@@ -32,7 +32,7 @@ Azure サブスクリプションに Language Understanding オーサリング�
     - **オーサリングの場所**: *希望する場所を選択します*
     - **オーサリングの価格レベル**: F0
     - **予測の場所**: *オーサリング場所と<u>同じ場所</u>を選択します*
-    - **予測の価格レベル**: F0 (* F0が利用できない場合はS0を選択します*)
+    - **予測の価格レベル**: F0 (*F0が利用できない場合はS0を選択します*)
 
 3. リソースが作成されるのを待ち、2 つの Language Understanding リソースがプロビジョニングされることに注意してください。1 つはオーサリング用で、もう 1 つは予測用です。作成したリソース グループに移動すると、これらの両方を表示できます。
 
@@ -87,7 +87,7 @@ pip install azure-cognitiveservices-speech==1.14.0
     - **C#**: Program.cs
     - **Python**: speaking-clock-client&period;py
 
-    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」**というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
+    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」** というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
 
 **C#**
 
@@ -108,7 +108,7 @@ import azure.cognitiveservices.speech as speech_sdk
 
 音声入力から予測意図を取得するコードを実装する準備が整いました。
 
-1. **Main** 関数では、構成ファイルからアプリ ID、予測リージョン、およびキーを読み込むためのコードが既に提供されていることに注意してください。そして、コメント**「Configure speech service and get intent recognizer」**を見つけ、次のコードを追加して、Language Understanding 予測リソースの詳細を使用して、**Speech SDKSpeechConfig** と **IntentRecognizer** を作成します。
+1. **Main** 関数では、構成ファイルからアプリ ID、予測リージョン、およびキーを読み込むためのコードが既に提供されていることに注意してください。そして、コメント **「Configure speech service and get intent recognizer」** を見つけ、次のコードを追加して、Language Understanding 予測リソースの詳細を使用して、**Speech SDKSpeechConfig** と **IntentRecognizer** を作成します。
 
 **C#**
 
@@ -126,7 +126,7 @@ speech_config = speech_sdk.SpeechConfig(subscription=lu_prediction_key, region=l
 recognizer = speech_sdk.intent.IntentRecognizer(speech_config)
 ```
     
-2. 追加したコードのすぐ下に、コメント**「Get the model from the AppID and add the intents we want to use」**を見つけ、使用する意図を追加し、次のコードを追加して、(アプリ ID に基づいて) Language Understanding モデルを取得し、認識機能に識別させたい意図を指定します。
+2. 追加したコードのすぐ下に、コメント **「Get the model from the AppID and add the intents we want to use」** を見つけ、使用する意図を追加し、次のコードを追加して、(アプリ ID に基づいて) Language Understanding モデルを取得し、認識機能に識別させたい意図を指定します。
 
 **C#**
 
@@ -155,7 +155,7 @@ intents = [
 recognizer.add_intents(intents)
 ```
 
-3. **Main** のコードは、ユーザーが「stop」と言うまで継続的にループすることに注意してください。このループ内で、コメント**「Process speech input」**を見つけ、次のコードを追加します。このコードは、レコグナイザーを使用して、音声入力を使用して Language Understanding サービスを非同期的に呼び出し、応答を取得します。応答に予測された意図が含まれている場合、音声クエリ、予測された意図、および完全な JSON 応答が表示されます。それ以外の場合、コードは返された理由に基づいて応答を処理します。
+3. **Main** のコードは、ユーザーが「stop」と言うまで継続的にループすることに注意してください。このループ内で、コメント **「Process speech input」** を見つけ、次のコードを追加します。このコードは、レコグナイザーを使用して、音声入力を使用して Language Understanding サービスを非同期的に呼び出し、応答を取得します。応答に予測された意図が含まれている場合、音声クエリ、予測された意図、および完全な JSON 応答が表示されます。それ以外の場合、コードは返された理由に基づいて応答を処理します。
     
 **C#**
 
@@ -233,7 +233,7 @@ elif result.reason == speech_sdk.ResultReason.Canceled:
     
 これまでに追加したコードは*意図*を識別しますが、一部の意図は*エンティティ*を参照できるため、サービスから返される JSON からエンティティ情報を抽出するコードを追加する必要があります。
 
-4. 追加したコードで、コメント**「Get the first entity (if any)」**を見つけ、その下に次のコードを追加します。
+4. 追加したコードで、コメント **「Get the first entity (if any)」** を見つけ、その下に次のコードを追加します。
 
 **C#**
 
@@ -265,7 +265,7 @@ if len(json_response["entities"]) > 0:
         
 コードは、言語理解アプリを使用して、入力発話で検出されたエンティティだけでなく、インテントも予測するようになりました。クライアント アプリケーションは、その予測を使用して適切なアクションを決定および実行する必要があります。
 
-5. 追加したコードの下に、**「Apply the appropriate action」**というコメントを見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および **GetDay**) をチェックし、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
+5. 追加したコードの下に、 **「Apply the appropriate action」** というコメントを見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および **GetDay**) をチェックし、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
 
 **C#**
 

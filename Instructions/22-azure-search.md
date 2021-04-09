@@ -63,7 +63,7 @@ Margie'sTravel　用に作成するソリューションには、Azure　サブ�
 
 1. Azure portalの 「ホーム」 ページに戻り、**&#65291;「リソースの作成」** ボタンを選択し、*ストレージ アカウント*を検索して、次の設定で**ストレージ アカウント** リソースを作成します。
     - **サブスクリプション**: *お使いの Azure サブスクリプション*
-    - **リソース グループ**: ** Azure Cognitive Search および Cognitive Services リソースと同じリソースグループ*
+    - **リソース グループ**: *Azure Cognitive Search および Cognitive Services リソースと同じリソースグループ*
     - **ストレージ アカウント名**: *一意の名前を入力します*
     - **場所**: *使用可能な場所を選択します*
     - **パフォーマンス**: Standard
@@ -135,13 +135,13 @@ Web ブラウザーのタブが開き、Azure にサインインするように�
 
     | フィールド名 | 「取得可能」 | フィルター可能 | 並べ替え可能 | ファセット可能 | 検索可能 |
     | ---------- | ----------- | ---------- | -------- | --------- | ---------- |
-    | metadata_storage_size | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; | | |
-    | metadata_storage_last_modified | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; | | |
-    | metadata_storage_name | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; |
-    | metadata_author | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; |
-    | 場所 | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | | | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; |
-    | キーフレーズ | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | | | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; |
-    | 言語 | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004;  | ＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆nbsp;＆＃10004; | | | |
+    | metadata_storage_size | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | |
+    | metadata_storage_last_modified | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | |
+    | metadata_storage_name | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
+    | metadata_author | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
+    | locations | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
+    | keyphrases | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; |
+    | language | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#10004; | | | |
 
 11. 選択内容を再確認し、特に注意して、各フィールドで正しい**取得可能**、**フィルター可能**、**並べ替え可能**、**ファセット可能**、および**検索可能**オプションが選択されていることを確認します (後で変更するのは難しい場合があります)。次に、次の手順 (*インデクサーの作成*) に進みます。
 12. **インデクサー名**を　**margies-indexer**.変更します。
@@ -158,11 +158,11 @@ Web ブラウザーのタブが開き、Azure にサインインするように�
 インデックスができたので、検索できます。
 
 1. Azure Cognitive Search リソースの **「概要」** ページの上部で、**「検索エクスプローラー」** を選択します。
-2. 検索エクスプローラーの **「クエリ文字列」** ボックスに「*」 (単一のアスタリスク) と入力し、**「検索」** を選択します。
+2. 検索エクスプローラーの **「クエリ文字列」** ボックスに`*` (単一のアスタリスク) と入力し、**「検索」** を選択します。
 
     このクエリは、インデックス内のすべてのドキュメントを JSON 形式で取得します。結果を調べて、選択した認知スキルによって抽出されたドキュメント コンテンツ、メタデータ、および強化されたデータを含む各ドキュメントのフィールドをメモします。
 
-3. クエリ文字列を「search = *＆$ count = true」に変更し、検索を送信します。
+3. クエリ文字列を`search = *＆$ count = true`に変更し、検索を送信します。
 
     今回の結果には、検索によって返されたドキュメントの数を示す　**@odata.count** ftフィールドが結果の上部に含まれています。
 
@@ -304,7 +304,7 @@ Web ブラウザーのタブが開き、Azure にサインインするように�
     modify-search
     ```
 
-3. スクリプトが終了したら、Azure portal　の　Azure Cognitive Search　リソースの　「**概要」　** (**) ページに戻り、**「インデクサー」**　ページを表示します。定期的に **「更新**」 を選択して、インデックス作成操作の進行状況を追跡します。完了するまでに 1 分ほどかかる場合があります。
+3. スクリプトが終了したら、Azure portal　の　Azure Cognitive Search　リソースの　「**概要」** (**) ページに戻り、**「インデクサー」**　ページを表示します。定期的に **「更新**」 を選択して、インデックス作成操作の進行状況を追跡します。完了するまでに 1 分ほどかかる場合があります。
 
     *感情を評価するには大きすぎるいくつかのドキュメントに対して、いくつかの警告がある場合があります。多くの場合、感情分析は、ドキュメント全体ではなく、ページまたは文レベルで実行されます。ただし、この場合のシナリオでは、ほとんどのドキュメント（特にホテルのレビュー）は、有用なドキュメントレベルの感情スコアを評価するのに十分なほど短いものです。*
 
@@ -413,7 +413,7 @@ Web アプリには、検索結果を処理およびレンダリングするた�
     フラスコの実行
     ```
 
-2. アプリが正常に起動したときに表示されるメッセージで、実行中の Web アプリケーション (*http://localhost:5000/*または*http://127.0.0.1:5000/ *) へのリンクをたどって、Webブラウザで Margies Travel サイトを開きます。
+2. アプリが正常に起動したときに表示されるメッセージで、実行中の Web アプリケーション (*http://localhost:5000/*または*http://127.0.0.1:5000/*) へのリンクをたどって、Webブラウザで Margies Travel サイトを開きます。
 3. Margie's Travelの Web サイトで、検索ボックスに **London hotel** と入力し、**「検索」**　をクリックします。
 4. 検索結果を確認します。これらには、ファイル名 (ファイル URL へのハイパーリンク付き)、検索語 (*London* および *hotel*) が強調されたファイル コンテンツの抽出、およびインデックス フィールドからのファイルの他の属性が含まれます。
 5. 結果ページには、結果を絞り込むことができるいくつかのユーザーインターフェイス要素が含まれていることに注意してください。下記を含みます。

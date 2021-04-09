@@ -65,7 +65,7 @@ pip install azure-cognitiveservices-vision-computervision==0.7.0
     - **C#**: Program.cs
     - **Python**: image-analysis&period;py
 
-    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」**というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision SDK を使用するために必要な名前空間をインポートします
+    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」** というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision SDK を使用するために必要な名前空間をインポートします
 
 **C#**
 
@@ -95,7 +95,7 @@ from msrest.authentication import CognitiveServicesCredentials
 
 これで、SDK を使用して Computer Vision サービスを呼び出す準備が整いました。
 
-1. クライアント アプリケーションのコード ファイル (**Program.cs** または **image-analysis&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント**「Authenticate Computer Vision client」**を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
+1. クライアント アプリケーションのコード ファイル (**Program.cs** または **image-analysis&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Authenticate Computer Vision client」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
 
 **C#**
 
@@ -118,7 +118,7 @@ cv_client = ComputerVisionClient(cog_endpoint, credential)
 
 2. **Main** 関数で、追加したコードの下で、コードが画像ファイルへのパスを指定し、画像パスを他の 2 つの関数 (**AnalyzeImage** と **GetThumbnail**) に渡すことに注意してください。これらの関数はまだ完全には実装されていません。
 
-3. **AnalyzeImage** 関数のコメン**「Specify features to be retrieved」**の下に、次のコードを追加します。
+3. **AnalyzeImage** 関数のコメン **「Specify features to be retrieved」** の下に、次のコードを追加します。
 
 **C#**
 
@@ -147,7 +147,7 @@ features = [VisualFeatureTypes.description,
             VisualFeatureTypes.adult]
 ```
     
-4. **AnalyzeImage**関数のコメント**「Get image analysis」**の下に、次のコードを追加します (後でコードを追加する場所を示すコメントを含む)。
+4. **AnalyzeImage**関数のコメント **「Get image analysis」** の下に、次のコードを追加します (後でコードを追加する場所を示すコメントを含む)。
 
 **C#**
 
@@ -230,7 +230,7 @@ python image-analysis.py images/street.jpg
 
 画像の内容に関する手がかりを提供する関連*タグ*を特定すると役立つ場合があります。
 
-1. **AnalyzeImage** 関数のコメント**「Get image tags」**の下に、次のコードを追加します。
+1. **AnalyzeImage** 関数のコメント **「Get image tags」** の下に、次のコードを追加します。
 
 **C#**
 
@@ -262,7 +262,7 @@ if (len(analysis.tags) > 0):
 
 Computer Vision サービスは、画像の*カテゴリ*を提案でき、各カテゴリ内で有名なランドマークや有名人を識別できます。
 
-1. **AnalyzeImage** 関数のコメント**「Get image categories (including celebrities and landmarks)」**の下に、次のコードを追加します
+1. **AnalyzeImage** 関数のコメント **「Get image categories (including celebrities and landmarks)」** の下に、次のコードを追加します
 
 **C#**
 
@@ -398,7 +398,7 @@ if (len(analysis.brands) > 0):
 
 *物体検出*は、画像内の個々のオブジェクトが識別され、その場所が境界ボックスで示される特定の形式の Computer Vision です。
 
-1. **AnalyzeImage** 関数のコメント**「Get objects in the image」**の下に、次のコードを追加します。
+1. **AnalyzeImage** 関数のコメント **「Get objects in the image」** の下に、次のコードを追加します。
 
 **C#**
 
@@ -469,7 +469,7 @@ if len(analysis.objects) > 0:
 
 一部の画像はすべての視聴者に適しているとは限らないため、成人向けまたは暴力的な性質の画像を特定するためにモデレートを適用する必要がある場合があります。
 
-1. **AnalyzeImage** 関数のコメント**「Get moderation ratings」**の下に、次のコードを追加します。
+1. **AnalyzeImage** 関数のコメント **「Get moderation ratings」** の下に、次のコードを追加します。
 
 **C#**
 
@@ -497,7 +497,7 @@ print(ratings)
 
 場合によっては、*サムネイル*という名前の画像の小さいバージョンを作成し、それをトリミングして、新しい画像の寸法内に主要な視覚的主題を含める必要があります。
 
-1. コード ファイルで、**GetThumbnail** 関数を見つけます。コメント**「Generate a thumbnail」**の下に、次のコードを追加します。
+1. コード ファイルで、**GetThumbnail** 関数を見つけます。コメント **「Generate a thumbnail」** の下に、次のコードを追加します。
 
 **C#**
 

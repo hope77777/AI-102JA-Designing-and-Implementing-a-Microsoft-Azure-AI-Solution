@@ -67,7 +67,7 @@ lab:
     - **C#**: Program.cs
     - **Python**: translator&period;py
 
-    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」**というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
+    コード ファイルを開き、上部の既存の名前空間参照の下で、 **「名前空間のインポート」** というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Speech SDK を使用するために必要な名前空間インポートします。
 
     **C#**
     
@@ -85,7 +85,7 @@ lab:
     import azure.cognitiveservices.speech as speech_sdk
     ```
 
-5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。これらの変数を使用して、音声入力の翻訳に使用する Cognitive Services リソースの **SpeechTranslationConfig** を作成する必要があります。コメント**「Configure translation」**の下に次のコードを追加します。
+5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。これらの変数を使用して、音声入力の翻訳に使用する Cognitive Services リソースの **SpeechTranslationConfig** を作成する必要があります。コメント **「Configure translation」** の下に次のコードを追加します。
 
     **C#**
     
@@ -111,7 +111,7 @@ lab:
     print('Ready to translate from',translation_config.speech_recognition_language)
     ```
 
-6. **SpeechTranslationConfig** を使用して音声をテキストに翻訳しますが、**SpeechConfig** を使用して翻訳を音声に合成します。コメント**「Configure speech」**の下に次のコードを追加します。
+6. **SpeechTranslationConfig** を使用して音声をテキストに翻訳しますが、**SpeechConfig** を使用して翻訳を音声に合成します。コメント **「Configure speech」** の下に次のコードを追加します。
 
     **C#**
     
@@ -148,7 +148,7 @@ lab:
 認知サービス リソースに音声サービス用の **SpeechTranslationConfig** が用意されたので、**Speech translation** APIを使用して音声を認識および翻訳できます。
 
 1. プログラムの **Main** 関数で、コードが **Translate** 関数を使用して音声入力を翻訳していることに注意してください。
-2. **Translate** 関数のコメント**「Translate speech」**の下に、次のコードを追加して、入力にデフォルトのシステムマイクを使用して音声を認識および翻訳するために使用できる **TranslationRecognizer** クライアントを作成します。
+2. **Translate** 関数のコメント **「Translate speech」** の下に、次のコードを追加して、入力にデフォルトのシステムマイクを使用して音声を認識および翻訳するために使用できる **TranslationRecognizer** クライアントを作成します。
 
     > **注**: *ファイル パスを参照するように **AudioConfig** オブジェクトを変更することにより、オーディオ ファイルからの音声入力を翻訳することもできます。*
 
@@ -205,7 +205,7 @@ lab:
 
 これまでのところ、アプリケーションは音声入力をテキストに翻訳します。旅行中に誰かに助けを求める必要がある場合は、これで十分かもしれません。ただし、適切な声で翻訳を声に出して話してもらう方がよいでしょう。
 
-1. **Translate** 機能では、コメント**「Synthesize translation」**の下に次のコードを追加して、デフォルトのスピーカーから音声として翻訳を合成するために **SpeechSynthesizer** クライアントを使用します。
+1. **Translate** 機能では、コメント **「Synthesize translation」** の下に次のコードを追加して、デフォルトのスピーカーから音声として翻訳を合成するために **SpeechSynthesizer** クライアントを使用します。
 
     **C#**
     

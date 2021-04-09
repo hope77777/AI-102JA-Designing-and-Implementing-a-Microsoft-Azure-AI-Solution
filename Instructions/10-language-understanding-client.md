@@ -32,7 +32,7 @@ Azure サブスクリプションに Language Understanding オーサリング�
     - **オーサリングの場所**: *希望する場所を選択します*
     - **オーサリングの価格レベル**: F0
     - **予測の場所**: *オーサリング場所と<u>同じ場所</u>を選択します*
-    - **予測の価格レベル**: F0 (* F0が利用できない場合はS0を選択します*)
+    - **予測の価格レベル**: F0 (*F0が利用できない場合はS0を選択します*)
 
 3. リソースが作成されるのを待ち、2 つの Language Understanding リソースがプロビジョニングされることに注意してください。1 つはオーサリング用で、もう 1 つは予測用です。作成したリソース グループに移動すると、これらの両方を表示できます。
 
@@ -67,7 +67,7 @@ Azure サブスクリプションに Language Understanding オーサリング�
 dotnet add package Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime --version 3.0.0
 ```
 
-***ランタイム** (予測) パッケージに加えて、Language Understanding モデルを作成および管理するためのコードを記述するために使用できる**オーサリング** パッケージがあります。*
+* **ランタイム** (予測) パッケージに加えて、Language Understanding モデルを作成および管理するためのコードを記述するために使用できる **オーサリング** パッケージがあります。*
 
 **Python**
 
@@ -88,7 +88,7 @@ pip install azure-cognitiveservices-language-luis==0.7.0
     - **C#**: Program.cs
     - **Python**: clock-client&period;py
 
-    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」**というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Language Understanding 予測 SDK を使用するために必要な名前空間をインポートします。
+    コード ファイルを開き、上部の既存の名前空間参照の下で、**「名前空間のインポート」** というコメントを見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Language Understanding 予測 SDK を使用するために必要な名前空間をインポートします。
 
 **C#**
 
@@ -110,7 +110,7 @@ from msrest.authentication import CognitiveServicesCredentials
 
 これで、SDK を使用して Language Understanding アプリから予測を取得するコードを実装する準備が整いました。
 
-1. **Main** 関数では、構成ファイルからアプリ ID、予測エンドポイント、およびキーを読み込むためのコードが既に提供されていることに注意してください。次に、コメント**「Create a client for the LU app」**を見つけ、次のコードを追加して、Language Understanding アプリの予測クライアントを作成します。
+1. **Main** 関数では、構成ファイルからアプリ ID、予測エンドポイント、およびキーを読み込むためのコードが既に提供されていることに注意してください。次に、コメント **「Create a client for the LU app」** を見つけ、次のコードを追加して、Language Understanding アプリの予測クライアントを作成します。
 
 **C#**
 
@@ -128,7 +128,7 @@ credentials = CognitiveServicesCredentials(lu_prediction_key)
 lu_client = LUISRuntimeClient(lu_prediction_endpoint, credentials)
 ```
 
-2. ユーザーが「quit」と入力するまで、**Main** 関数のコードはユーザー入力を求めるプロンプトを表示することに注意してください。このループ内で、コメント**「Call the LU app to get intent and entities」**を見つけて、次のコードを追加します。
+2. ユーザーが「quit」と入力するまで、**Main** 関数のコードはユーザー入力を求めるプロンプトを表示することに注意してください。このループ内で、コメント **「Call the LU app to get intent and entities」** を見つけて、次のコードを追加します。
 
 **C#**
 
@@ -160,7 +160,7 @@ print('-----------------\n{}'.format(prediction_response.query))
 
 Language Understanding アプリを呼び出すと、予測が返されます。これには、入力発話で検出されたエンティティだけでなく、最上位の (最も可能性の高い) 意図も含まれます。クライアント アプリケーションは、その予測を使用して適切なアクションを決定および実行する必要があります。
 
-3. コメント**「Apply the appropriate action」**を見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および**GetDay**) をチェックします。また、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
+3. コメント **「Apply the appropriate action」** を見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および**GetDay**) をチェックします。また、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
 
 **C#**
 

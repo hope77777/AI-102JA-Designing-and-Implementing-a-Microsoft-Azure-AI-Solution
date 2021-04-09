@@ -55,16 +55,16 @@ QnA Maker リソースにナレッジ ベースを作成するには、QnA Maker
 ナレッジ ベースには、Microsoft Learn FAQ の質問と回答のペアが入力されており、会話型 *chit-chat* の質問と回答のペアが追加されています。質問と回答のペアを追加することで、ナレッジ ベースを拡張できます。
 
 1. ナレッジ ベースで、**「QnA ペアの追加」** を選択します。
-2. **「質問」**ボックスに「What is Microsoft certification?」と入力します。
-3. **「代替フレージングの追加」** を選択し、「How can I demonstrate my Microsoft technology skills?」と入力します。
-4. **「回答」**ボックスに「The Microsoft Certified Professional program enables you to validate and prove your skills with Microsoft technologies.」と入力します。
+2. **「質問」** ボックスに`What is Microsoft certification?`と入力します。
+3. **「代替フレージングの追加」** を選択し、`How can I demonstrate my Microsoft technology skills?`と入力します。
+4. **「回答」** ボックスに`The Microsoft Certified Professional program enables you to validate and prove your skills with Microsoft technologies.`と入力します。
 
     場合によっては、ユーザーが回答をフォローアップして、*複数ターン*会話を作成できるようにすることが理にかなっています。ユーザーは、質問を繰り返し絞り込んで、必要な回答者にたどり着きます。
 
 5. 認定の質問に入力した回答の下で、**「フォローアップ プロンプトの追加」** を選択します。
 6. **「フォローアップ プロンプト」** ダイアログ ボックスで、次の設定を入力します。
-    - **表示テキスト**: 「Learn more about certification.」
-    - **QnAへのリンク**\*: 「You can learn more about certification on the [Microsoft certification page](https://docs.microsoft.com/learn/certifications/).」
+    - **表示テキスト**: `Learn more about certification.`
+    - **QnAへのリンク**\*: `You can learn more about certification on the [Microsoft certification page](https://docs.microsoft.com/learn/certifications/).`
     - **コンテキストのみ**: オンにします。*このオプションにより、元の認定質問からのフォローアップ質問のコンテキストでのみ回答が返されるようになります。*
 
     \***「QnA へのリンク」** ボックスに入力すると、ナレッジ ベース内の既存の回答が検索されます。一致するものが見つからない場合、デフォルトで新しい QnA ペアが作成されます。ここに入力するテキストはマークダウン形式であることに注意してください。
@@ -74,13 +74,13 @@ QnA Maker リソースにナレッジ ベースを作成するには、QnA Maker
 ナレッジベースができたので、QnA Maker ポータルでテストできます。
 
 1. ページの右上にある **「保存してトレーニング」** をクリックして、ナレッジベースをトレーニングします。
-2. トレーニングが完了したら、**「テスト」**をクリックして、「テスト」 ペインを開きます。
+2. トレーニングが完了したら、**「テスト」** をクリックして、「テスト」 ペインを開きます。
 3. 「テスト」 ペインの下部に、「*Hello*」というメッセージを入力します。適切な応答が返される必要があります。
 4. テストペインの下部に、「*What is Microsoft Learn?*」というメッセージを入力します。FAQ からの適切な応答が返される必要があります。
 5. 「*That makes me happy!*」というメッセージを入力します。適切な chit-chat 応答が返される必要があります。
 6. 「*Tell me about certification*」というメッセージを入力します。作成した回答は、フォローアップ プロンプト ボタンとともに返されます。
 7. **「認定のフォローアップの詳細」** ボタンを選択します。認定ページへのリンクを含むフォローアップ回答を返送する必要があります。
-8. ナレッジベースのテストが終了したら、**「テスト」**をクリックして、「テスト」 ペインを閉じます。
+8. ナレッジベースのテストが終了したら、**「テスト」** をクリックして、「テスト」 ペインを閉じます。
 
 ## ナレッジ ベースの公開
 
