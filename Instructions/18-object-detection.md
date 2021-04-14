@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Custom Vision 使用する画像内の物体の検出'
     module: 'モジュール 9 - Custom Vision ソリューションを開発する'
