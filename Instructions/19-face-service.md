@@ -277,7 +277,7 @@ from azure.cognitiveservices.vision.face.models import FaceAttributeType
 from msrest.authentication import CognitiveServicesCredentials
 ```
 
-5. **Main** 関数では、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント**「Authenticate Face client」**を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、**FaceClient** オブジェクトを作成および認証します
+5. **Main** 関数では、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Authenticate Face client」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、**FaceClient** オブジェクトを作成および認証します
 
 **C#**
 

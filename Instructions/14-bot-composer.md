@@ -74,7 +74,7 @@ Bot Framework Composer は、コードを記述せずに高度な会話型ボッ
 4. **「ユーザー入力」** タブで、**「プロパティ」** フィールドを`user.zipcode`に設定し、**「出力形式」** フィールドを式`= =trim(this.value)`に設定して、ユーザーが指定した値の周囲の余分なスペースを削除します。
 5. **「その他」** タブで、次の値を設定して、郵便番号入力の検証ルールを定義します。
     - **「レコグナイザー」** 領域で、**「認識されないプロンプト」** フィールドを`- Sorry the value '${this.value}' doesn't appear to be a valid entry.  Please enter a zip code in the form of 12345.`に設定します。
-    - **「検証」** セクションで、検証ルール`length(this.value) == 5`を追加して、郵便番号エントリの長さが5文字のみであることを確認します。次に、**「無効なプロンプト」**フィールドを`- Sorry, '${this.value}' is not valid. I'm looking for a 5-digit number as zip code. Please specify a zip code in the form 12345.`に設定します。
+    - **「検証」** セクションで、検証ルール`length(this.value) == 5`を追加して、郵便番号エントリの長さが5文字のみであることを確認します。次に、 **「無効なプロンプト」** フィールドを`- Sorry, '${this.value}' is not valid. I'm looking for a 5-digit number as zip code. Please specify a zip code in the form 12345.`に設定します。
     - **「プロンプト構成」** セクションで、**「デフォルト値」** プロパティを`98052`に設定します。
 
         既定では、プロンプトはユーザーに*最大ターン回数*の情報を要求するように構成されています (既定は 3)。最大回転数に達すると、プロンプトが停止し、会話を進める前に、プロパティが **「デフォルト値」** フィールドで定義された値に設定されます。
