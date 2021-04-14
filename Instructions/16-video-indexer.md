@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Video Indexer を使用する動画の分析'
     module: 'モジュール 8 - Computer Vision の概要'
