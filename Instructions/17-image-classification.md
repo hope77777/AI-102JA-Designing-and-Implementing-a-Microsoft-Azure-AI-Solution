@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Custom Vision を使用する画像の分類'
     module: 'モジュール 9 - Custom Vision ソリューションを開発する'
