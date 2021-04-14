@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Cognitive Services コンテナーの使用'
     module: 'モジュール 2 - Cognitive Services を使用した AI アプリの開発'
