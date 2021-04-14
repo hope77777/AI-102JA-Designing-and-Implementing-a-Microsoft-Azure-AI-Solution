@@ -188,7 +188,7 @@ namespace margies.search
     public static class wordcount
     {
 
-        //define classes for responses
+        //応答のためにクラスを定義する
         private class WebApiResponseError
         {
             public string message { get; set; }
@@ -212,7 +212,7 @@ namespace margies.search
             public List<WebApiResponseRecord> values { get; set; }
         }
 
-        //function for custom skill
+        //カスタム スキルの関数
         [FunctionName("wordcount")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)]HttpRequest req, ILogger log)
@@ -225,7 +225,7 @@ namespace margies.search
             string requestBody = new StreamReader(req.Body).ReadToEnd();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-            // Validation
+            // 検証
             if (data?.values == null)
             {
                 return new BadRequestObjectResult(" Could not find values array");
@@ -247,7 +247,7 @@ namespace margies.search
                     return new BadRequestObjectResult("recordId cannot be null");
                 }
 
-                // Put together response.
+                // 応答をまとめる。
                 WebApiResponseRecord responseRecord = new WebApiResponseRecord();
                 responseRecord.data = new Dictionary<string, object>();
                 responseRecord.recordId = recordId;
@@ -270,18 +270,18 @@ namespace margies.search
         public static List<string> Count(string text)
         {
             
-            //remove html elements
+            //html エレメントを削除する
             text=text.ToLowerInvariant();
             string html = RemoveHtmlTags(text);
             
-            //split into list of words
+            //単語リストを分割する
             List<string> list = html.Split(" ").ToList();
             
-            //remove any non alphabet characters
+            //英数文字以外を削除する
             var onlyAlphabetRegEx = new Regex(@"^[A-z]+$");
             list = list.Where(f => onlyAlphabetRegEx.IsMatch(f)).ToList();
 
-            //remove stop words
+            //ストップ ワードを削除する
             string[] stopwords = { "", "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", 
                     "you're", "you've", "you'll", "you'd", "your", "yours", "yourself", 
                     "yourselves", "he", "him", "his", "himself", "she", "she's", "her", 
@@ -305,11 +305,11 @@ namespace margies.search
                     "wasn't", "weren", "weren't", "won", "won't", "wouldn", "wouldn't"}; 
             list = list.Where(x => x.Length > 2).Where(x => !stopwords.Contains(x)).ToList();
             
-            //get distict words by key and count, and then order by count.
+            //キーとカウント、さらにはカウントによる順番によって特徴のある単語を取得する
             var keywords = list.GroupBy(x => x).OrderByDescending(x => x.Count());
             var klist = keywords.ToList();
 
-            // return the top 10 words
+            // 上位 10 個の単語を返す
             var numofWords = 10;
             if(klist.Count<10)
                 numofWords=klist.Count;
@@ -339,13 +339,13 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Wordcount function initiated.')
 
-    # The result will be a "values" bag
+    # 結果は "values" バッグになります
     result = {
         "values": []
     }
     statuscode = 200
 
-    # We're going to exclude words from this list in the word counts
+    # 単語のカウント内のこのリストから、単語を除外します
     stopwords = [ ''、 'i'、 'me'、 'my'、 'myself'、 'we'、 'our'、 'ours'、 'ourselves'、 'you'、 
                 "you're"、 "you've" 、 "you'll"、 "you'd"、 'your'、 'yours'、 'yourself'、 
                 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 
@@ -373,7 +373,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info（values）
 
         for rec in values：
-            # Construct the basic JSON response for this record
+            # このレコードのベーシックな JSON 応答を作成する
             val = {
                     "recordId": rec['recordId'],
                     "data": {
@@ -383,29 +383,29 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     "warnings": None
                 }
             try:
-                # get the text to be processed from the input record
+                # 入力レコードから処理されるテキストを取得する
                 txt = rec['data']['text']
-                # remove numeric digits
+                # 数値を削除する
                 txt = ''.join(c for c in txt if not c.isdigit())
-                # remove punctuation and make lower case
+                # 句読点と小文字を削除する
                 txt = ''.join(c for c in txt if c not in punctuation).lower()
-                # remove stopwords
+                # ストップワードを削除する
                 txt = ' '.join(w for w in txt.split() if w not in stopwords)
-                # Count the words and get the most common 10
+                # 単語をカウントして、出現個数の多い上位 10 を取得する
                 wordcount = Counter(txt.split()).most_common(10)
                 words = [w[0] for w in wordcount]
-                # Add the top 10 words to the output for this text record
+                # このテキスト レコードの出力に上位 10 個の単語を追加する
                 val["data"]["text"] = words
             except:
-                # An error occured for this text record, so add lists of errors and warning
+                # このテキスト レコードではエラーが発生するため、エラーと警告のリストを追加する
                 val["errors"] =[{"message": "An error occurred processing the text."}]
                 val["warnings"] = [{"message": "One or more inputs failed to process."}]
             finally:
-                # Add the value for this record to the response
+                # このレコードの数値を応答に追加する
                 result["values"].append(val)
     except Exception as ex:
         statuscode = 500
-        # A global error occurred, so return an error response
+        # グローバル エラーが発生したため、エラー応答が返される
         val = {
                 "recordId": None,
                 "data": {
@@ -416,7 +416,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             }
         result["values"].append(val)
     finally:
-        # Return the response
+        # 応答を返す
         return func.HttpResponse(body=json.dumps(result), mimetype="application/json", status_code=statuscode)
 ```
     

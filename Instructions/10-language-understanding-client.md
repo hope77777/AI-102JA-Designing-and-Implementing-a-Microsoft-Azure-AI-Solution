@@ -93,7 +93,7 @@ pip install azure-cognitiveservices-language-luis==0.7.0
 **C#**
 
 ```C#
-// Import namespaces
+// 名前空間をインポートする
 using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime;
 using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
 ```
@@ -101,7 +101,7 @@ using Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.Models;
 **Python**
 
 ```Python
-# Import namespaces
+# 名前空間をインポートする
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 from msrest.authentication import CognitiveServicesCredentials
 ```
@@ -115,7 +115,7 @@ from msrest.authentication import CognitiveServicesCredentials
 **C#**
 
 ```C#
-// Create a client for the LU app
+// LU アプリのクライアントを作成する
 var credentials = new Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime.ApiKeyServiceClientCredentials(predictionKey);
 var luClient = new LUISRuntimeClient(credentials) { Endpoint = predictionEndpoint };
 ```
@@ -128,12 +128,12 @@ credentials = CognitiveServicesCredentials(lu_prediction_key)
 lu_client = LUISRuntimeClient(lu_prediction_endpoint, credentials)
 ```
 
-2. ユーザーが「quit」と入力するまで、**Main** 関数のコードはユーザー入力を求めるプロンプトを表示することに注意してください。このループ内で、コメント **「Call the LU app to get intent and entities」** を見つけて、次のコードを追加します。
+2. ユーザーが「quit」と入力するまで、**Main** 関数のコードはユーザー入力を求めるプロンプトを表示することに注意してください。このループ内で、コメント **「LU アプリを呼び出して意図とエンティティを取得する」** を見つけて、次のコードを追加します。
 
 **C#**
 
 ```C#
-// Call the LU app to get intent and entities
+// LU アプリを呼び出して意図とエンティティを取得する
 var slot = "Production";
 var request = new PredictionRequest { Query = userText };
 PredictionResponse predictionResponse = await luClient.Prediction.GetSlotPredictionAsync(luAppId, slot, request);
@@ -147,7 +147,7 @@ var entities = predictionResponse.Prediction.Entities;
 **Python**
 
 ```Python
-# Call the LU app to get intent and entities
+# LU アプリを呼び出して意図とエンティティを取得する
 request = { "query" : userText }
 slot = 'Production'
 prediction_response = lu_client.prediction.get_slot_prediction(lu_app_id, slot, request)
@@ -160,30 +160,30 @@ print('-----------------\n{}'.format(prediction_response.query))
 
 Language Understanding アプリを呼び出すと、予測が返されます。これには、入力発話で検出されたエンティティだけでなく、最上位の (最も可能性の高い) 意図も含まれます。クライアント アプリケーションは、その予測を使用して適切なアクションを決定および実行する必要があります。
 
-3. コメント **「Apply the appropriate action」** を見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および**GetDay**) をチェックします。また、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
+3. コメント **「適切なアクションを適用する」** を見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および**GetDay**) をチェックします。また、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
 
 **C#**
 
 ```C#
-// Apply the appropriate action
+// 適切なアクションを適用する
 switch (topIntent)
 {
     case "GetTime":
         var location = "local";
-        // Check for entities
+        // エンティティを確認する
         if (entities.Count > 0)
         {
-            // Check for a location entity
+            // 場所のエンティティを確認する
             if (entities.ContainsKey("Location"))
             {
-                //Get the JSON for the entity
+                //エンティティの JSON を取得する
                 var entityJson = JArray.Parse(entities["Location"].ToString());
-                // ML entities are strings, get the first one
+                // ML エンティティは文字列で、一番上の項目を取得する
                 location = entityJson[0].ToString();
             }
         }
 
-        // Get the time for the specified location
+        // 指定した型のファセットを取得する
         var getTimeTask = Task.Run(() => GetTime(location));
         string timeResponse = await getTimeTask;
         Console.WriteLine(timeResponse);
@@ -191,19 +191,19 @@ switch (topIntent)
 
     case "GetDay":
         var date = DateTime.Today.ToShortDateString();
-        // Check for entities
+        // エンティティを確認する
         if (entities.Count > 0)
         {
-            // Check for a Date entity
+            // データ エンティティを確認する
             if (entities.ContainsKey("Date"))
             {
-                //Get the JSON for the entity
+                //エンティティの JSON を取得する
                 var entityJson = JArray.Parse(entities["Date"].ToString());
-                // Regex entities are strings, get the first one
+                // Regex  エンティティは文字列で、一番上の項目を取得する
                 date = entityJson[0].ToString();
             }
         }
-        // Get the day for the specified date
+        // 指定した日付の「日」を取得する
         var getDayTask = Task.Run(() => GetDay(date));
         string dayResponse = await getDayTask;
         Console.WriteLine(dayResponse);
@@ -211,26 +211,26 @@ switch (topIntent)
 
     case "GetDate":
         var day = DateTime.Today.DayOfWeek.ToString();
-        // Check for entities
+        // エンティティを確認する
         if (entities.Count > 0)
         {
-            // Check for a Weekday entity
+            // Weekday エンティティを確認する
             if (entities.ContainsKey("Weekday"))
             {
-                //Get the JSON for the entity
+                //エンティティの JSON を取得する
                 var entityJson = JArray.Parse(entities["Weekday"].ToString());
-                // List entities are lists
+                // エンティティ リストを列挙する
                 day = entityJson[0][0].ToString();
             }
         }
-        // Get the date for the specified day
+        // 指定した日の日付を取得する
         var getDateTask = Task.Run(() => GetDate(day));
         string dateResponse = await getDateTask;
         Console.WriteLine(dateResponse);
         break;
 
     default:
-        // Some other intent (for example, "None") was predicted
+        // 他のインテント (例: "None") が予測されました
         Console.WriteLine("Try asking me for the time, the day, or the date.");
         break;
 }
@@ -239,42 +239,42 @@ switch (topIntent)
 **Python**
 
 ```Python
-# Apply the appropriate action
+# 適切なアクションを適用する
 if top_intent == 'GetTime':
     location = 'local'
-    # Check for entities
+    # エンティティを確認する
     if len(entities) > 0:
-        # Check for a location entity
+        # 場所のエンティティを確認する
         if 'Location' in entities:
-            # ML entities are strings, get the first one
+            # ML エンティティは文字列で、一番上の項目を取得する
             location = entities['Location'][0]
-    # Get the time for the specified location
+    # 指定した型のファセットを取得する
     print(GetTime(location))
 
 elif top_intent == 'GetDay':
     date_string = date.today().strftime("%m/%d/%Y")
-    # Check for entities
+    # エンティティを確認する
     if len(entities) > 0:
-        # Check for a Date entity
+        # データ エンティティを確認する
         if 'Date' in entities:
-            # Regex entities are strings, get the first one
+            # Regex  エンティティは文字列で、一番上の項目を取得する
             date_string = entities['Date'][0]
-    # Get the day for the specified date
+    # 指定した日付の「日」を取得する
     print(GetDay(date_string))
 
 elif top_intent == 'GetDate':
     day = 'today'
-    # Check for entities
+    # エンティティを確認する
     if len(entities) > 0:
-        # Check for a Weekday entity
+        # Weekday エンティティを確認する
         if 'Weekday' in entities:
-            # List entities are lists
+            # エンティティ リストを列挙する
             day = entities['Weekday'][0][0]
-    # Get the date for the specified day
+    # 指定した日の日付を取得する
     print(GetDate(day))
 
 else:
-    # Some other intent (for example, "None") was predicted
+    # 他のインテント (例: "None") が予測されました
     print('Try asking me for the time, the day, or the date.')
 ```
     

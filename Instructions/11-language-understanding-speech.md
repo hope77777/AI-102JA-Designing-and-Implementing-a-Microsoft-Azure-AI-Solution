@@ -92,7 +92,7 @@ pip install azure-cognitiveservices-speech==1.14.0
 **C#**
 
 ```C#
-// Import namespaces
+// 名前空間をインポートする
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Intent;
 ```
@@ -100,7 +100,7 @@ using Microsoft.CognitiveServices.Speech.Intent;
 **Python**
 
 ```Python
-# Import namespaces
+# 名前空間をインポートする
 import azure.cognitiveservices.speech as speech_sdk
 ```
     
@@ -108,12 +108,12 @@ import azure.cognitiveservices.speech as speech_sdk
 
 音声入力から予測意図を取得するコードを実装する準備が整いました。
 
-1. **Main** 関数では、構成ファイルからアプリ ID、予測リージョン、およびキーを読み込むためのコードが既に提供されていることに注意してください。そして、コメント **「Configure speech service and get intent recognizer」** を見つけ、次のコードを追加して、Language Understanding 予測リソースの詳細を使用して、**Speech SDKSpeechConfig** と **IntentRecognizer** を作成します。
+1. **Main** 関数では、構成ファイルからアプリ ID、予測リージョン、およびキーを読み込むためのコードが既に提供されていることに注意してください。そして、コメント **「スピーチ サービスを構成して認識エンジンを取得する」** を見つけ、次のコードを追加して、Language Understanding 予測リソースの詳細を使用して、**Speech SDKSpeechConfig** と **IntentRecognizer** を作成します。
 
 **C#**
 
 ```C#
-// Configure speech service and get intent recognizer
+// 音声サービスを構成する and get intent recognizer
 SpeechConfig speechConfig = SpeechConfig.FromSubscription(predictionKey, predictionRegion);
 IntentRecognizer recognizer = new IntentRecognizer(speechConfig);
 ```
@@ -121,17 +121,17 @@ IntentRecognizer recognizer = new IntentRecognizer(speechConfig);
 **Python**
 
 ```Python
-# Configure speech service and get intent recognizer
+# 音声サービスを構成する and get intent recognizer
 speech_config = speech_sdk.SpeechConfig(subscription=lu_prediction_key, region=lu_prediction_region)
 recognizer = speech_sdk.intent.IntentRecognizer(speech_config)
 ```
     
-2. 追加したコードのすぐ下に、コメント **「Get the model from the AppID and add the intents we want to use」** を見つけ、使用する意図を追加し、次のコードを追加して、(アプリ ID に基づいて) Language Understanding モデルを取得し、認識機能に識別させたい意図を指定します。
+2. 追加したコードのすぐ下に、コメント **「AppID からモデルを取得して使用する意図を追加する」** を見つけ、使用する意図を追加し、次のコードを追加して、(アプリ ID に基づいて) Language Understanding モデルを取得し、認識機能に識別させたい意図を指定します。
 
 **C#**
 
 ```C#
-// Get the model from the AppID and add the intents we want to use
+// AppID からモデルを取得して使用する意図を追加する
 var model = LanguageUnderstandingModel.FromAppId(luAppId);
 recognizer.AddIntent(model, "GetTime", "time");
 recognizer.AddIntent(model, "GetDate", "date");
@@ -144,7 +144,7 @@ recognizer.AddIntent(model, "None", "none");
 **Python**
 
 ```Python
-# Get the model from the AppID and add the intents we want to use
+# AppID からモデルを取得して使用する意図を追加する
 model = speech_sdk.intent.LanguageUnderstandingModel(app_id=lu_app_id)
 intents = [
     (model, "GetTime"),
@@ -155,41 +155,41 @@ intents = [
 recognizer.add_intents(intents)
 ```
 
-3. **Main** のコードは、ユーザーが「stop」と言うまで継続的にループすることに注意してください。このループ内で、コメント **「Process speech input」** を見つけ、次のコードを追加します。このコードは、レコグナイザーを使用して、音声入力を使用して Language Understanding サービスを非同期的に呼び出し、応答を取得します。応答に予測された意図が含まれている場合、音声クエリ、予測された意図、および完全な JSON 応答が表示されます。それ以外の場合、コードは返された理由に基づいて応答を処理します。
+3. **Main** のコードは、ユーザーが「stop」と言うまで継続的にループすることに注意してください。このループ内で、コメント **「音声入力を処理する」** を見つけ、次のコードを追加します。このコードは、レコグナイザーを使用して、音声入力を使用して Language Understanding サービスを非同期的に呼び出し、応答を取得します。応答に予測された意図が含まれている場合、音声クエリ、予測された意図、および完全な JSON 応答が表示されます。それ以外の場合、コードは返された理由に基づいて応答を処理します。
     
 **C#**
 
 ```C
-// Process speech input
+// 音声入力を処理する
 var result = await recognizer.RecognizeOnceAsync().ConfigureAwait(false);
 if (result.Reason == ResultReason.RecognizedIntent)
 {
-    // Intent was identified
+    // 意図が認識されました
     intent = result.IntentId;
     Console.WriteLine($"Query: {result.Text}");
     Console.WriteLine($"Intent Id: {intent}.");
     string jsonResponse = result.Properties.GetProperty(PropertyId.LanguageUnderstandingServiceResponse_JsonResult);
     Console.WriteLine($"JSON Response:\n{jsonResponse}\n");
     
-    // Get the first entity (if any)
+    // 最初のエントリを取得する (該当する場合)
 
-    // Apply the appropriate action
+    // 適切なアクションを適用する
     
 }
 else if (result.Reason == ResultReason.RecognizedSpeech)
 {
-    // Speech was recognized, but no intent was identified.
+    // 音声は認識されましたが特定された意図はありませんでした。
     intent = result.Text;
     Console.Write($"I don't know what {intent} means.");
 }
 else if (result.Reason == ResultReason.NoMatch)
 {
-    // Speech wasn't recognized
+    // 音声が認識されませんでした。
     Console.WriteLine($"Sorry. I didn't understand that.");
 }
 else if (result.Reason == ResultReason.Canceled)
 {
-    // Something went wrong
+    // 問題が発生した場合
     var cancellation = CancellationDetails.FromResult(result);
     Console.WriteLine($"CANCELED: Reason={cancellation.Reason}");
 
@@ -204,7 +204,7 @@ else if (result.Reason == ResultReason.Canceled)
 **Python**
 
 ```Python
-# Process speech input
+# 音声入力を処理する
 result = recognizer.recognize_once_async().get()
 if result.reason == speech_sdk.ResultReason.RecognizedIntent:
     intent = result.intent_id
@@ -213,19 +213,19 @@ if result.reason == speech_sdk.ResultReason.RecognizedIntent:
     json_response = json.loads(result.intent_json)
     print("JSON Response:\n{}\n".format(json.dumps(json_response, indent=2)))
     
-    # Get the first entity (if any)
+    # 最初のエントリを取得する (該当する場合)
     
-    # Apply the appropriate action
+    # 適切なアクションを適用する
     
 elif result.reason == speech_sdk.ResultReason.RecognizedSpeech:
-    # Speech was recognized, but no intent was identified.
+    # 音声は認識されましたが特定された意図はありませんでした。
     intent = result.text
     print("I don't know what {} means.".format(intent))
 elif result.reason == speech_sdk.ResultReason.NoMatch:
-    # Speech wasn't recognized
+    # 音声が認識されませんでした。
     print("Sorry. I didn't understand that.")
 elif result.reason == speech_sdk.ResultReason.Canceled:
-    # Something went wrong
+    # 問題が発生した場合
     print("Intent recognition canceled: {}".format(result.cancellation_details.reason))
     if result.cancellation_details.reason == speech_sdk.CancellationReason.Error:
         print("Error details: {}".format(result.cancellation_details.error_details))
@@ -233,12 +233,12 @@ elif result.reason == speech_sdk.ResultReason.Canceled:
     
 これまでに追加したコードは*意図*を識別しますが、一部の意図は*エンティティ*を参照できるため、サービスから返される JSON からエンティティ情報を抽出するコードを追加する必要があります。
 
-4. 追加したコードで、コメント **「Get the first entity (if any)」** を見つけ、その下に次のコードを追加します。
+4. 追加したコードで、コメント **「最初のエントリを取得する (該当する場合)」** を見つけ、その下に次のコードを追加します。
 
 **C#**
 
 ```C
-// Get the first entity (if any)
+// 最初のエントリを取得する (該当する場合)
 JObject jsonResults = JObject.Parse(jsonResponse);
 string entityType = "";
 string entityValue = "";
@@ -254,7 +254,7 @@ if (jsonResults["entities"].HasValues)
 **Python**
 
 ```Python
-# Get the first entity (if any)
+# 最初のエントリを取得する (該当する場合)
 entity_type = ''
 entity_value = ''
 if len(json_response["entities"]) > 0:
@@ -265,41 +265,41 @@ if len(json_response["entities"]) > 0:
         
 コードは、言語理解アプリを使用して、入力発話で検出されたエンティティだけでなく、インテントも予測するようになりました。クライアント アプリケーションは、その予測を使用して適切なアクションを決定および実行する必要があります。
 
-5. 追加したコードの下に、 **「Apply the appropriate action」** というコメントを見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および **GetDay**) をチェックし、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
+5. 追加したコードの下に、 **「適切なアクションを適用する」** というコメントを見つけ、次のコードを追加します。このコードは、アプリケーションでサポートされている意図 (**GetTime**、**GetDate**、および **GetDay**) をチェックし、適切な応答を生成するために既存の関数を呼び出す前に、関連するエンティティが検出されたかどうかを判断します。
 
 **C#**
 
 ```C#
-// Apply the appropriate action
+// 適切なアクションを適用する
 switch (intent)
 {
     case "time":
         var location = "local";
-        // Check for entities
+        // エンティティを確認する
         if (entityType == "Location")
         {
             location = entityValue;
         }
-        // Get the time for the specified location
+        // 指定した型のファセットを取得する
         var getTimeTask = Task.Run(() => GetTime(location));
         string timeResponse = await getTimeTask;
         Console.WriteLine(timeResponse);
         break;
     case "day":
         var date = DateTime.Today.ToShortDateString();
-        // Check for entities
+        // エンティティを確認する
         if (entityType == "Date")
         {
             date = entityValue;
         }
-        // Get the day for the specified date
+        // 指定した日付の「日」を取得する
         var getDayTask = Task.Run(() => GetDay(date));
         string dayResponse = await getDayTask;
         Console.WriteLine(dayResponse);
         break;
     case "date":
         var day = DateTime.Today.DayOfWeek.ToString();
-        // Check for entities
+        // エンティティを確認する
         if (entityType == "Weekday")
         {
             day = entityValue;
@@ -310,7 +310,7 @@ switch (intent)
         Console.WriteLine(dateResponse);
         break;
     default:
-        // Some other intent (for example, "None") was predicted
+        // 他のインテント (例: "None") が予測されました
         Console.WriteLine("You said " + result.Text.ToLower());
         if (result.Text.ToLower().Replace(".", "") == "stop")
         {
@@ -327,34 +327,34 @@ switch (intent)
 **Python**
 
 ```Python
-# Apply the appropriate action
+# 適切なアクションを適用する
 if intent == 'GetTime':
     location = 'local'
-    # Check for entities
+    # エンティティを確認する
     if entity_type == 'Location':
         location = entity_value
-    # Get the time for the specified location
+    # 指定した型のファセットを取得する
     print(GetTime(location))
 
 elif intent == 'GetDay':
     date_string = date.today().strftime("%m/%d/%Y")
-    # Check for entities
+    # エンティティを確認する
     if entity_type == 'Date':
         date_string = entity_value
-    # Get the day for the specified date
+    # 指定した日付の「日」を取得する
     print(GetDay(date_string))
 
 elif intent == 'GetDate':
     day = 'today'
-    # Check for entities
+    # エンティティを確認する
     if entity_type == 'Weekday':
-        # List entities are lists
+        # エンティティ リストを列挙する
         day = entity_value
-    # Get the date for the specified day
+    # 指定した日の日付を取得する
     print(GetDate(day))
 
 else:
-    # Some other intent (for example, "None") was predicted
+    # 他のインテント (例: "None") が予測されました
     print('You said {}'.format(result.text))
     if result.text.lower().replace('.', '') == 'stop':
         intent = result.text

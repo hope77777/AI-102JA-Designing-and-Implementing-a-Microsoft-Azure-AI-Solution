@@ -70,7 +70,7 @@ pip install azure-cognitiveservices-vision-computervision==0.7.0
 **C#**
 
 ```C#
-// import namespaces
+// 名前空間をインポートする
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 ```
@@ -78,7 +78,7 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 **Python**
 
 ```Python
-# import namespaces
+# 名前空間をインポートする
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
@@ -95,12 +95,12 @@ from msrest.authentication import CognitiveServicesCredentials
 
 これで、SDK を使用して Computer Vision サービスを呼び出す準備が整いました。
 
-1. クライアント アプリケーションのコード ファイル (**Program.cs** または **image-analysis&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Authenticate Computer Vision client」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
+1. クライアント アプリケーションのコード ファイル (**Program.cs** または **image-analysis&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Computer Vision クライアントを認証する」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
 
 **C#**
 
 ```C#
-// Authenticate Computer Vision client
+// Computer Vision クライアントを認証する
 ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
 cvClient = new ComputerVisionClient(credentials)
 {
@@ -111,19 +111,19 @@ cvClient = new ComputerVisionClient(credentials)
 **Python**
 
 ```Python
-# Authenticate Computer Vision client
+# Computer Vision クライアントを認証する
 credential = CognitiveServicesCredentials(cog_key) 
 cv_client = ComputerVisionClient(cog_endpoint, credential)
 ```
 
 2. **Main** 関数で、追加したコードの下で、コードが画像ファイルへのパスを指定し、画像パスを他の 2 つの関数 (**AnalyzeImage** と **GetThumbnail**) に渡すことに注意してください。これらの関数はまだ完全には実装されていません。
 
-3. **AnalyzeImage** 関数のコメン **「Specify features to be retrieved」** の下に、次のコードを追加します。
+3. **AnalyzeImage** 関数のコメン **「取得する機能を特定する」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C#
-// Specify features to be retrieved
+// 取得する機能を特定する
 List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
 {
     VisualFeatureTypes.Description,
@@ -138,7 +138,7 @@ List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
 **Python**
 
 ```Python
-# Specify features to be retrieved
+# 取得する機能を特定する
 features = [VisualFeatureTypes.description,
             VisualFeatureTypes.tags,
             VisualFeatureTypes.categories,
@@ -152,30 +152,30 @@ features = [VisualFeatureTypes.description,
 **C#**
 
 ```C
-// Get image analysis
+//  画像分析を取得する
 using (var imageData = File.OpenRead(imageFile))
 {    
     var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
 
-    // get image captions
+    // 画像キャプションを取得する
     foreach (var caption in analysis.Description.Captions)
     {
         Console.WriteLine($"Description: {caption.Text} (confidence: {caption.Confidence.ToString("P")})");
     }
 
-    // Get image tags
+    //  画像タグを取得する
 
 
-    // Get image categories
+    // 画像カテゴリを取得する
 
 
-    // Get brands in the image
+    // 画像からブランドを取得する
 
 
-    // Get objects in the image
+    // 画像からオブジェクトを取得する
 
 
-    // Get moderation ratings
+    // モデレーション評価を取得する
     
 
 }            
@@ -184,27 +184,27 @@ using (var imageData = File.OpenRead(imageFile))
 **Python**
 
 ```Python
-# Get image analysis
+#  画像分析を取得する
 with open(image_file, mode="rb") as image_data:
     analysis = cv_client.analyze_image_in_stream（image_data、features）
 
-# Get image description
+# 画像の詳細を取得する
 for caption in analysis.description.captions:
     print("Description: '{}'（confidence： {:.2f}%)".format(caption.text, caption.confidence * 100))
 
-# Get image tags
+#  画像タグを取得する
 
 
-# Get image categories 
+# 画像カテゴリを取得する 
 
 
-# Get brands in the image
+# 画像からブランドを取得する
 
 
-# Get objects in the image
+# 画像からオブジェクトを取得する
 
 
-# Get moderation ratings
+# モデレーション評価を取得する
 
 ```
     
@@ -230,12 +230,12 @@ python image-analysis.py images/street.jpg
 
 画像の内容に関する手がかりを提供する関連*タグ*を特定すると役立つ場合があります。
 
-1. **AnalyzeImage** 関数のコメント **「Get image tags」** の下に、次のコードを追加します。
+1. **AnalyzeImage** 関数のコメント **「 画像タグを取得する」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C
-// Get image tags
+//  画像タグを取得する
 if (analysis.Tags.Count > 0)
 {
     Console.WriteLine("Tags:");
@@ -249,7 +249,7 @@ if (analysis.Tags.Count > 0)
 **Python**
 
 ```Python
-# Get image tags
+#  画像タグを取得する
 if (len(analysis.tags) > 0):
     print("Tags: ")
     for tag in analysis.tags:
@@ -258,25 +258,25 @@ if (len(analysis.tags) > 0):
 
 2. 変更を保存し、**images** フォルダー内の画像ファイルごとにプログラムを 1 回実行し、**Main** 関数でファイル名を変更して、画像のキャプションに加えて、提案されたタグのリストが表示されることを確認します。
 
-## Get image categories
+## 画像カテゴリを取得する
 
 Computer Vision サービスは、画像の*カテゴリ*を提案でき、各カテゴリ内で有名なランドマークや有名人を識別できます。
 
-1. **AnalyzeImage** 関数のコメント **「Get image categories (including celebrities and landmarks)」** の下に、次のコードを追加します
+1. **AnalyzeImage** 関数のコメント **「画像カテゴリを取得する (有名人とランドマークを含む)」** の下に、次のコードを追加します
 
 **C#**
 
 ```C
-// Get image categories (including celebrities and landmarks)
+// 画像カテゴリを取得する (有名人とランドマークを含む)
 List<LandmarksModel> landmarks = new List<LandmarksModel> {};
 List<CelebritiesModel> celebrities = new List<CelebritiesModel> {};
 Console.WriteLine("Categories:");
 foreach (var category in analysis.Categories)
 {
-    // Print the category
+    // カテゴリを印刷する
     Console.WriteLine($" -{category.Name} (confidence: {category.Score.ToString("P")})");
 
-    // Get landmarks in this category
+    // カテゴリからランドマークを取得する
     if (category.Detail?.Landmarks != null)
     {
         foreach (LandmarksModel landmark in category.Detail.Landmarks)
@@ -288,7 +288,7 @@ foreach (var category in analysis.Categories)
         }
     }
 
-    // Get celebrities in this category
+    // カテゴリから有名人を取得する
     if (category.Detail?.Celebrities != null)
     {
         foreach (CelebritiesModel celebrity in category.Detail.Celebrities)
@@ -301,7 +301,7 @@ foreach (var category in analysis.Categories)
     }
 }
 
-// If there were landmarks, list them
+// ランドマークがある場合はリストする
 if (landmarks.Count > 0)
 {
     Console.WriteLine("Landmarks:");
@@ -311,7 +311,7 @@ if (landmarks.Count > 0)
     }
 }
 
-// If there were celebrities, list them
+// 有名人がいる場合はリストする
 if (celebrities.Count > 0)
 {
     Console.WriteLine("Celebrities:");
@@ -325,34 +325,34 @@ if (celebrities.Count > 0)
 **Python**
 
 ```Python
-# Get image categories (including celebrities and landmarks)
+# 画像カテゴリを取得する (有名人とランドマークを含む)
 if (len(analysis.categories) > 0):
     print("Categories:")
     landmarks = []
     celebrities = []
     for category in analysis.categories:
-        # Print the category
+        # カテゴリを印刷する
         print(" -'{}' (confidence: {:.2f}%)".format(category.name, category.score * 100))
         if category.detail:
-            # Get landmarks in this category
+            # カテゴリからランドマークを取得する
             if category.detail.landmarks:
                 for landmark in category.detail.landmarks:
                     if landmark not in landmarks:
                         landmarks.append(landmark)
 
-            # Get celebrities in this category
+            # カテゴリから有名人を取得する
             if category.detail.celebrities:
                 for celebrity in category.detail.celebrities:
                     if celebrity not in celebrities:
                         celebrities.append(celebrity)
 
-    # If there were landmarks, list them
+    # ランドマークがある場合はリストする
     if len(landmarks) > 0:
         print("Landmarks:")
         for landmark in landmarks:
             print(" -'{}' (confidence: {:.2f}%)".format(landmark.name, landmark.confidence * 100))
 
-    # If there were celebrities, list them
+    # 有名人がいる場合はリストする
     if len(celebrities) > 0:
         print("Celebrities:")
         for celebrity in celebrities:
@@ -366,12 +366,12 @@ if (len(analysis.categories) > 0):
 
 一部のブランドは、ブランド名が表示されていなくても、ロゴから視覚的に認識できます。Computer Visionサービス は、何千もの有名なブランドを特定するためにトレーニングされています。
 
-1. **AnalyzeImage** 関数で、コメント「**Get brands in the image**」下に、次のコードを追加します。
+1. **AnalyzeImage** 関数で、コメント「**画像からブランドを取得する**」下に、次のコードを追加します。
 
 **C#**
 
 ```C
-// Get brands in the image
+// 画像からブランドを取得する
 if (analysis.Brands.Count > 0)
 {
     Console.WriteLine("Brands:");
@@ -385,7 +385,7 @@ if (analysis.Brands.Count > 0)
 **Python**
 
 ```Python
-# Get brands in the image
+# 画像からブランドを取得する
 if (len(analysis.brands) > 0):
     print("Brands: ")
     for brand in analysis.brands:
@@ -403,12 +403,12 @@ if (len(analysis.brands) > 0):
 **C#**
 
 ```C
-// Get objects in the image
+// 画像からオブジェクトを取得する
 if (analysis.Objects.Count > 0)
 {
     Console.WriteLine("Objects in image:");
 
-    // Prepare image for drawing
+    // 描画用に画像を準備する
     Image image = Image.FromFile(imageFile);
     Graphics graphics = Graphics.FromImage(image);
     Pen pen = new Pen(Color.Cyan, 3);
@@ -417,17 +417,17 @@ if (analysis.Objects.Count > 0)
 
     foreach (var detectedObject in analysis.Objects)
     {
-        // Print object name
+        // オブジェクト名を印刷する
         Console.WriteLine($" -{detectedObject.ObjectProperty} (confidence: {detectedObject.Confidence.ToString("P")})");
 
-        // Draw object bounding box
+        // オブジェクトの境界ボックスを描画する
         var r = detectedObject.Rectangle;
         Rectangle rect = new Rectangle（rX、rY、rW、rH）;
         graphics.DrawRectangle(pen, rect);
         graphics.DrawString(detectedObject.ObjectProperty,font,brush,r.X, r.Y);
 
     }
-    // Save annotated image
+    // 注釈付き画像を保存する
     String output_file = "objects.jpg";
     image.Save(output_file);
     Console.WriteLine("  Results saved in " + output_file);   
@@ -437,26 +437,26 @@ if (analysis.Objects.Count > 0)
 **Python**
 
 ```Python
-# Get objects in the image
+# 画像からオブジェクトを取得する
 if len(analysis.objects) > 0:
     print("Objects in image:")
 
-    # Prepare image for drawing
+    # 描画用に画像を準備する
     fig = plt.figure(figsize=(8, 8))
     plt.axis('off')
     image = Image.open(image_file)
     draw = ImageDraw.Draw(image)
     color = 'cyan'
     for detected_object in analysis.objects:
-        # Print object name
+        # オブジェクト名を印刷する
         print(" -{} (confidence: {:.2f}%)".format(detected_object.object_property, detected_object.confidence * 100))
         
-        # Draw object bounding box
+        # オブジェクトの境界ボックスを描画する
         r = detected_object.rectangle
         bounding_box = ((r.x, r.y), (r.x + r.w, r.y + r.h))
         draw.rectangle(bounding_box, outline=color, width=3)
         plt.annotate(detected_object.object_property,(r.x, r.y), backgroundcolor=color)
-    # Save annotated image
+    # 注釈付き画像を保存する
     plt.imshow(image)
     outputfile = 'objects.jpg'
     fig.savefig(outputfile)
@@ -469,12 +469,12 @@ if len(analysis.objects) > 0:
 
 一部の画像はすべての視聴者に適しているとは限らないため、成人向けまたは暴力的な性質の画像を特定するためにモデレートを適用する必要がある場合があります。
 
-1. **AnalyzeImage** 関数のコメント **「Get moderation ratings」** の下に、次のコードを追加します。
+1. **AnalyzeImage** 関数のコメント **「モデレーション評価を取得する」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C
-// Get moderation ratings
+// モデレーション評価を取得する
 string ratings = $"Ratings:\n -Adult: {analysis.Adult.IsAdultContent}\n -Racy: {analysis.Adult.IsRacyContent}\n -Gore: {analysis.Adult.IsGoryContent}";
 Console.WriteLine(ratings);
 ```
@@ -482,7 +482,7 @@ Console.WriteLine(ratings);
 **Python**
 
 ```Python
-# Get moderation ratings
+# モデレーション評価を取得する
 ratings = 'Ratings:\n -Adult: {}\n -Racy: {}\n -Gore: {}'.format(analysis.adult.is_adult_content,
                                                                     analysis.adult.is_racy_content,
                                                                     analysis.adult.is_gory_content)
@@ -497,18 +497,18 @@ print(ratings)
 
 場合によっては、*サムネイル*という名前の画像の小さいバージョンを作成し、それをトリミングして、新しい画像の寸法内に主要な視覚的主題を含める必要があります。
 
-1. コード ファイルで、**GetThumbnail** 関数を見つけます。コメント **「Generate a thumbnail」** の下に、次のコードを追加します。
+1. コード ファイルで、**GetThumbnail** 関数を見つけます。コメント **「サムネイルを生成する」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C
-// Generate a thumbnail
+// サムネイルを生成する
 using (var imageData = File.OpenRead(imageFile))
 {
-    // Get thumbnail data
+    // サムネイル データを取得する
     var thumbnailStream = await cvClient.GenerateThumbnailInStreamAsync(100, 100,imageData, true);
 
-    // Save thumbnail image
+    // サムネイル画像を保存する
     string thumbnailFileName = "thumbnail.png";
     using (Stream thumbnailFile = File.Create(thumbnailFileName))
     {
@@ -522,12 +522,12 @@ using (var imageData = File.OpenRead(imageFile))
 **Python**
 
 ```Python
-# Generate a thumbnail
+# サムネイルを生成する
 with open(image_file, mode="rb") as image_data:
-    # Get thumbnail data
+    # サムネイル データを取得する
     thumbnail_stream = cv_client.generate_thumbnail_in_stream(100, 100, image_data, True)
 
-# Save thumbnail image
+# サムネイル画像を保存する
 thumbnail_file_name = 'thumbnail.png'
 with open(thumbnail_file_name, "wb") as thumbnail_file:
     for chunk in thumbnail_stream:

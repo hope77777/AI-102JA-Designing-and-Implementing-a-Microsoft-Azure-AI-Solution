@@ -226,12 +226,12 @@ python test-model.py
     - **C#**: Program.cs
     - **Python**: train-model&period;py
 
-5. **Main** 関数で、コメント「**Train model**」を見つけ、図のように変更して、ラベルが使用されるようにトレーニング プロセスを変更します。
+5. **Main** 関数で、コメント「**モデルをトレーニングする**」を見つけ、図のように変更して、ラベルが使用されるようにトレーニング プロセスを変更します。
 
 **C#**
 
 ```C#
-// Train model 
+// モデルをトレーニングする 
 CustomFormModel model = await trainingClient
 .StartTrainingAsync(new Uri(trainingStorageUri), useTrainingLabels: true)
 .WaitForCompletionAsync();
@@ -240,7 +240,7 @@ CustomFormModel model = await trainingClient
 **Python**
 
 ```Python
-# Train model 
+# モデルをトレーニングする 
 poller = form_training_client.begin_training(trainingDataUrl, use_training_labels=True)
 model = poller.result()
 ```

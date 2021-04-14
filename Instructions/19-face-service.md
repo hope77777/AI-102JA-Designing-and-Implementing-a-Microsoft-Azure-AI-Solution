@@ -70,7 +70,7 @@ pip install azure-cognitiveservices-vision-computervision==0.7.0
 **C#**
 
 ```C#
-// import namespaces
+// 名前空間をインポートする
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 ```
@@ -78,7 +78,7 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 **Python**
 
 ```Python
-# import namespaces
+# 名前空間をインポートする
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
@@ -95,12 +95,12 @@ from msrest.authentication import CognitiveServicesCredentials
 
 これで、SDK を使用して Computer Vision サービスを呼び出し、画像内の顔を検出する準備が整いました。
 
-1. クライアント アプリケーションのコード ファイル (**Program.cs** または **detect-faces&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Authenticate Computer Vision client」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
+1. クライアント アプリケーションのコード ファイル (**Program.cs** または **detect-faces&period;py**) の **Main** 関数で、構成設定をロードするためのコードが提供されていることに注意してください。次に、コメント **「Computer Vision クライアントを認証する」** を見つけます。次に、このコメントの下に、次の言語固有のコードを追加して、Computer Vision クライアント オブジェクトを作成および認証します
 
 **C#**
 
 ```C#
-// Authenticate Computer Vision client
+// Computer Vision クライアントを認証する
 ApiKeyServiceClientCredentials credentials = new ApiKeyServiceClientCredentials(cogSvcKey);
 cvClient = new ComputerVisionClient(credentials)
 {
@@ -111,19 +111,19 @@ cvClient = new ComputerVisionClient(credentials)
 **Python**
 
 ```Python
-# Authenticate Computer Vision client
+# Computer Vision クライアントを認証する
 credential = CognitiveServicesCredentials(cog_key) 
 cv_client = ComputerVisionClient(cog_endpoint, credential)
 ```
 
 2. **Main** 関数で、追加したコードの下で、コードが画像ファイルへのパスを指定し、**AnalyzeFaces** という名前の関数に画像パスを渡すことに注意してください。この関数はまだ完全には実装されていません。
 
-3. **AnalyzeFaces** 関数のコメン **「Specify features to be retrieved (faces)」** の下に、次のコードを追加します。
+3. **AnalyzeFaces** 関数のコメン **「取得する特徴を指定する (顔)」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C#
-// Specify features to be retrieved (faces)
+// 取得する特徴を指定する (顔)
 List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
 {
     VisualFeatureTypes.Faces
@@ -133,7 +133,7 @@ List<VisualFeatureTypes?> features = new List<VisualFeatureTypes?>()
 **Python**
 
 ```Python
-# Specify features to be retrieved (faces)
+# 取得する特徴を指定する (顔)
 features = [VisualFeatureTypes.faces]
 ```
     
@@ -142,24 +142,24 @@ features = [VisualFeatureTypes.faces]
 **C#**
 
 ```C
-// Get image analysis
+//  画像分析を取得する
 using (var imageData = File.OpenRead(imageFile))
 {    
     var analysis = await cvClient.AnalyzeImageInStreamAsync(imageData, features);
 
-    // Get faces
+    // 顔を取得する
     if (analysis.Faces.Count > 0)
     {
         Console.WriteLine($"{analysis.Faces.Count} faces detected.");
 
-        // Prepare image for drawing
+        // 描画用に画像を準備する
         Image image = Image.FromFile(imageFile);
         Graphics graphics = Graphics.FromImage(image);
         Pen pen = new Pen(Color.LightGreen, 3);
         Font font = new Font("Arial", 3);
         SolidBrush brush = new SolidBrush(Color.LightGreen);
 
-        // Draw and annotate each face
+        // 注釈付き顔を描画する
         foreach (var face in analysis.Faces)
         {
             var r = face.FaceRectangle;
@@ -169,7 +169,7 @@ using (var imageData = File.OpenRead(imageFile))
             graphics.DrawString(annotation,font,brush,r.Left, r.Top);
         }
 
-        // Save annotated image
+        // 注釈付き画像を保存する
         String output_file = "detected_faces.jpg";
         image.Save(output_file);
         Console.WriteLine(" Results saved in " + output_file);   
@@ -180,22 +180,22 @@ using (var imageData = File.OpenRead(imageFile))
 **Python**
 
 ```Python
-# Get image analysis
+#  画像分析を取得する
 with open(image_file, mode="rb") as image_data:
     analysis = cv_client.analyze_image_in_stream（image_data、features）
 
-    # Get faces
+    # 顔を取得する
     if analysis.faces:
         print(len(analysis.faces), 'faces detected.')
 
-        # Prepare image for drawing
+        # 描画用に画像を準備する
         fig = plt.figure(figsize=(8, 6))
         plt.axis('off')
         image = Image.open(image_file)
         draw = ImageDraw.Draw(image)
         color = 'lightgreen'
 
-        # Draw and annotate each face
+        # 注釈付き顔を描画する
         for face in analysis.faces:
             r = face.face_rectangle
             bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
@@ -204,7 +204,7 @@ with open(image_file, mode="rb") as image_data:
             annotation = 'Person aged approximately {}'.format(face.age)
             plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
 
-        # Save annotated image
+        # 注釈付き画像を保存する
         plt.imshow(image)
         outputfile = 'detected_faces.jpg'
         fig.savefig(outputfile)
@@ -263,7 +263,7 @@ pip install azure-cognitiveservices-vision-face==0.4.1
 **C#**
 
 ```C#
-// Import namespaces
+// 名前空間をインポートする
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 ```
@@ -271,7 +271,7 @@ using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 **Python**
 
 ```Python
-# Import namespaces
+# 名前空間をインポートする
 from azure.cognitiveservices.vision.face import FaceClient
 from azure.cognitiveservices.vision.face.models import FaceAttributeType
 from msrest.authentication import CognitiveServicesCredentials
@@ -305,12 +305,12 @@ face_client = FaceClient(cog_endpoint, credentials)
 Face サービスの最も基本的な機能の 1 つは、画像内の顔を検出し、年齢、感情表現、髪の色、眼鏡の存在などの属性を決定することです。
 
 1. アプリケーションのコードファイルの **Main** 関数で、ユーザーがメニュー オプション **1** を選択した場合に実行されるコードを調べます。このコードは **DetectFaces** 関数を呼び出し、パスを画像ファイルに渡します。
-2. コードファイルで **DetectFaces** 関数を見付け、コメント **「Specify facial features to be retrieved」** の下に、次のコードを追加します。
+2. コードファイルで **DetectFaces** 関数を見付け、コメント **「検索対象の顔の特徴を指定する」** の下に、次のコードを追加します。
 
 **C#**
 
 ```C#
-// Specify facial features to be retrieved
+// 検索対象の顔の特徴を指定する
 List<FaceAttributeType?> features = new List<FaceAttributeType?>
 {
     FaceAttributeType.Age、
@@ -328,12 +328,12 @@ features = [FaceAttributeType.age,
             FaceAttributeType.glasses]
 ```
 
-3. **DetectFaces** 関数で、追加したコードの下に、コメント「**Get faces**」を見つけて、次のコードを追加します。
+3. **DetectFaces** 関数で、追加したコードの下に、コメント「**顔を取得する**」を見つけて、次のコードを追加します。
 
 **C#**
 
 ```C
-// Get faces
+// 顔を取得する
 using (var imageData = File.OpenRead(imageFile))
 {    
     var detected_faces = await faceClient.Face.DetectWithStreamAsync(imageData, returnFaceAttributes: features);
@@ -342,17 +342,17 @@ using (var imageData = File.OpenRead(imageFile))
     {
         Console.WriteLine($"{detected_faces.Count} faces detected.");
 
-        // Prepare image for drawing
+        // 描画用に画像を準備する
         Image image = Image.FromFile(imageFile);
         Graphics graphics = Graphics.FromImage(image);
         Pen pen = new Pen(Color.LightGreen, 3);
         Font font = new Font("Arial", 4);
         SolidBrush brush = new SolidBrush(Color.Black);
 
-        // Draw and annotate each face
+        // 注釈付き顔を描画する
         foreach (var face in detected_faces)
         {
-            // Get face properties
+            // 顔のプロパティを取得する
             Console.WriteLine($"\nFace ID: {face.FaceId}");
             Console.WriteLine($" - Age: {face.FaceAttributes.Age}");
             Console.WriteLine($" - Emotions:");
@@ -363,7 +363,7 @@ using (var imageData = File.OpenRead(imageFile))
 
             Console.WriteLine($" - Glasses: {face.FaceAttributes.Glasses}");
 
-            // Draw and annotate face
+            // 注釈付き顔を描画する
             var r = face.FaceRectangle;
             Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
             graphics.DrawRectangle(pen, rect);
@@ -371,7 +371,7 @@ using (var imageData = File.OpenRead(imageFile))
             graphics.DrawString(annotation,font,brush,r.Left, r.Top);
         }
 
-        // Save annotated image
+        // 注釈付き画像を保存する
         String output_file = "detected_faces.jpg";
         image.Save(output_file);
         Console.WriteLine(" Results saved in " + output_file);   
@@ -382,7 +382,7 @@ using (var imageData = File.OpenRead(imageFile))
 **Python**
 
 ```Python
-# Get faces
+# 顔を取得する
 with open(image_file, mode="rb") as image_data:
     detected_faces = face_client.face.detect_with_stream(image=image_data,
                                                             return_face_attributes=features)
@@ -390,17 +390,17 @@ with open(image_file, mode="rb") as image_data:
     if len(detected_faces) > 0:
         print(len(detected_faces), 'faces detected.')
 
-        # Prepare image for drawing
+        # 描画用に画像を準備する
         fig = plt.figure(figsize=(8, 6))
         plt.axis('off')
         image = Image.open(image_file)
         draw = ImageDraw.Draw(image)
         color = 'lightgreen'
 
-        # Draw and annotate each face
+        # 注釈付き顔を描画する
         for face in detected_faces:
 
-            # Get face properties
+            # 顔のプロパティを取得する
             print('\nFace ID: {}'.format(face.face_id))
             detected_attributes = face.face_attributes.as_dict()
             age = 'age unknown' if 'age' not in detected_attributes.keys() else int(detected_attributes['age'])
@@ -414,7 +414,7 @@ with open(image_file, mode="rb") as image_data:
             if 'glasses' in detected_attributes:
                 print(' - Glasses:{}'.format(detected_attributes['glasses']))
 
-            # Draw and annotate face
+            # 注釈付き顔を描画する
             r = face.face_rectangle
             bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
             draw = ImageDraw.Draw(image)
@@ -422,7 +422,7 @@ with open(image_file, mode="rb") as image_data:
             annotation = 'Face ID: {}'.format(face.face_id)
             plt.annotate(annotation,(r.left, r.top), backgroundcolor=color)
 
-        # Save annotated image
+        # 注釈付き画像を保存する
         plt.imshow(image)
         outputfile = 'detected_faces.jpg'
         fig.savefig(outputfile)
@@ -460,11 +460,11 @@ python analyze-faces.py
 **C#**
 
 ```C
-// Determine if the face in image 1 is also in image 2
+// 画像 1 の顔と、画像 2 の顔が同一であるかどうか判断する
 DetectedFace image_i_face;
 using (var image1Data = File.OpenRead(image1))
 {    
-    // Get the first face in image 1
+    // 画像 1 から最初の顔を取得する
     var image1_faces = await faceClient.Face.DetectWithStreamAsync(image1Data);
     if (image1_faces.Count > 0)
     {
@@ -479,12 +479,12 @@ using (var image1Data = File.OpenRead(image1))
         img1.Save(output_file);
         Console.WriteLine(" Results saved in " + output_file); 
 
-        //Get all the faces in image 2
+        //画像 2 からすべての顔を取得する
         using (var image2Data = File.OpenRead(image2))
         {    
             var image2Faces = await faceClient.Face.DetectWithStreamAsync(image2Data);
 
-            // Get faces
+            // 顔を取得する
             if (image2Faces.Count > 0)
             {
 
@@ -492,19 +492,19 @@ using (var image1Data = File.OpenRead(image1))
                 var similarFaces = await faceClient.Face.FindSimilarAsync((Guid)image_i_face.FaceId,faceIds:image2FaceIds);
                 var similarFaceIds = similarFaces.Select(f => f.FaceId).ToList<Guid?>();
 
-                // Prepare image for drawing
+                // 描画用に画像を準備する
                 Image img2 = Image.FromFile(image2);
                 Graphics graphics2 = Graphics.FromImage(img2);
                 Pen pen2 = new Pen(Color.LightGreen, 3);
                 Font font2 = new Font("Arial", 4);
                 SolidBrush brush2 = new SolidBrush(Color.Black);
 
-                // Draw and annotate each face
+                // 注釈付き顔を描画する
                 foreach (var face in image2Faces)
                 {
                     if (similarFaceIds.Contains(face.FaceId))
                     {
-                        // Draw and annotate face
+                        // 注釈付き顔を描画する
                         var r2 = face.FaceRectangle;
                         Rectangle rect2 = new Rectangle(r2.Left, r2.Top, r2.Width, r2.Height);
                         graphics2.DrawRectangle(pen2, rect2);
@@ -513,7 +513,7 @@ using (var image1Data = File.OpenRead(image1))
                     }
                 }
 
-                // Save annotated image
+                // 注釈付き画像を保存する
                 String output_file2 = "matched_faces.jpg";
                 img2.Save(output_file2);
                 Console.WriteLine(" Results saved in " + output_file2);   
@@ -527,13 +527,13 @@ using (var image1Data = File.OpenRead(image1))
 **Python**
 
 ```Python
-# Determine if the face in image 1 is also in image 2
+# 画像 1 の顔と、画像 2 の顔が同一であるかどうか判断する
 with open(image_1, mode="rb") as image_data:
-    # Get the first face in image 1
+    # 画像 1 から最初の顔を取得する
     image_1_faces = face_client.face.detect_with_stream(image=image_data)
     image_1_face = image_1_faces[0]
 
-    # Highlight the face in the image
+    # 画像内の顔をハイライトする
     fig = plt.figure(figsize=(8, 6))
     plt.axis('off')
     image = Image.open(image_1)
@@ -547,22 +547,22 @@ with open(image_1, mode="rb") as image_data:
     outputfile = 'face_to_match.jpg'
     fig.savefig(outputfile)
 
-# Get all the faces in image 2
+# 画像 2 からすべての顔を取得する
 with open(image_2, mode="rb") as image_data:
     image_2_faces = face_client.face.detect_with_stream(image=image_data)
     image_2_face_ids = list(map(lambda face: face.face_id, image_2_faces))
 
-    # Find faces in image 2 that are similar to the one in image 1
+    # 画像 1 に似ている画像 2 から顔を探す
     similar_faces = face_client.face.find_similar(face_id=image_1_face.face_id, face_ids=image_2_face_ids)
     similar_face_ids = list(map(lambda face: face.face_id, similar_faces))
 
-    # Prepare image for drawing
+    # 描画用に画像を準備する
     fig = plt.figure(figsize=(8, 6))
     plt.axis('off')
     image = Image.open(image_2)
     draw = ImageDraw.Draw(image)
 
-    # Draw and annotate matching faces
+    # 一致する顔を描画して注釈をつける
     for face in image_2_faces:
         if face.face_id in similar_face_ids:
             r = face.face_rectangle
@@ -571,7 +571,7 @@ with open(image_2, mode="rb") as image_data:
             draw.rectangle(bounding_box, outline='lightgreen', width=10)
             plt.annotate('Match!',(r.left, r.top + r.height + 15), backgroundcolor='white')
 
-    # Save annotated image
+    # 注釈付き画像を保存する
     plt.imshow(image)
     outputfile = 'matched_faces.jpg'
     fig.savefig(outputfile)
@@ -608,7 +608,7 @@ AI アプリケーションで顔を認識できる特定の人々のモデル�
 **C#**
 
 ```C
-// Delete group if it already exists
+// グループが残っている場合は削除する
 var groups = await faceClient.PersonGroup.ListAsync();
 foreach(var group in groups)
 {
@@ -618,18 +618,18 @@ foreach(var group in groups)
     }
 }
 
-// Create the group
+// グループを作成する
 await faceClient.PersonGroup.CreateAsync(groupId, groupName);
 Console.WriteLine("Group created!");
 
-// Add each person to the group
+// 各ユーザーをグループに追加する
 Console.Write("Adding people to the group...");
 foreach(var personName in imageFolders)
 {
-    // Add the person
+    // 新しいユーザーを追加する
     var person = await faceClient.PersonGroupPerson.CreateAsync(groupId, personName);
 
-    // Add multiple photo's of the person
+    // 人物の複数の写真を追加する
     string[] images = Directory.GetFiles("images/" + personName);
     foreach(var image in images)
     {
@@ -641,11 +641,11 @@ foreach(var personName in imageFolders)
 
 }
 
-    // Train the model
+    // モデルをトレーニングする
 Console.WriteLine("Training model...");
 await faceClient.PersonGroup.TrainAsync(groupId);
 
-// Get the list of people in the group
+// グループ内のユーザー リストを取得する
 Console.WriteLine("Facial recognition model trained with the following people:");
 var people = await faceClient.PersonGroupPerson.ListAsync(groupId);
 foreach(var person in people)
@@ -657,23 +657,23 @@ foreach(var person in people)
 **Python**
 
 ```Python
-# Delete group if it already exists
+# グループが残っている場合は削除する
 groups = face_client.person_group.list()
 for group in groups:
     if group.person_group_id == group_id:
         face_client.person_group.delete(group_id)
 
-# Create the group
+# グループを作成する
 face_client.person_group.create(group_id, group_name)
 print ('Group created!')
 
-# Add each person to the group
+# 各ユーザーをグループに追加する
 print('Adding people to the group...')
 for person_name in image_folders:
-    # Add the person
+    # 新しいユーザーを追加する
     person = face_client.person_group_person.create(group_id, person_name)
 
-    # Add multiple photo's of the person
+    # 人物の複数の写真を追加する
     folder = os.path.join('images', person_name)
     person_pics = os.listdir(folder)
     for pic in person_pics:
@@ -681,11 +681,11 @@ for person_name in image_folders:
         img_stream = open(img_path, "rb")
         face_client.person_group_person.add_face_from_stream(group_id, person.person_id, img_stream)
 
-# Train the model
+# モデルをトレーニングする
 print('Training model...')
 face_client.person_group.train(group_id)
 
-# Get the list of people in the group
+# グループ内のユーザー リストを取得する
 print('Facial recognition model trained with the following people:')
 people = face_client.person_group_person.list(group_id)
 for person in people:
@@ -726,22 +726,22 @@ python analyze-faces.py
 **C#**
 
 ```C
-// Detect faces in the image
+// 画像から顔を検出する
 using (var imageData = File.OpenRead(imageFile))
 {    
     var detectedFaces = await faceClient.Face.DetectWithStreamAsync(imageData);
 
-    // Get faces
+    // 顔を取得する
     if (detectedFaces.Count > 0)
     {
         
-        // Get a list of face IDs
+        // 顔 ID の一覧を取得する
         var faceIds = detectedFaces.Select(f => f.FaceId).ToList<Guid?>();
 
-        // Identify the faces in the people group
+        // ユーザー グループ内の顔を特定する
         var recognizedFaces = await faceClient.Face.IdentifyAsync(faceIds, groupId);
 
-        // Get names for recognized faces
+        // 認識された顔の名前を取得する
         var faceNames = new Dictionary<Guid?, string>();
         if (recognizedFaces.Count> 0)
         {
@@ -755,7 +755,7 @@ using (var imageData = File.OpenRead(imageFile))
         }
 
         
-        // Annotate faces in image
+        // 画像の中の顔に注釈をつける
         Image image = Image.FromFile(imageFile);
         Graphics graphics = Graphics.FromImage(image);
         Pen penYes = new Pen(Color.LightGreen, 3);
@@ -768,19 +768,19 @@ using (var imageData = File.OpenRead(imageFile))
             Rectangle rect = new Rectangle(r.Left, r.Top, r.Width, r.Height);
             if (faceNames.ContainsKey(face.FaceId))
             {
-                // If the face is recognized, annotate in green with the name
+                // 顔が認識されると、名前に緑で注釈をつける
                 graphics.DrawRectangle(penYes, rect);
                 string personName = faceNames[face.FaceId];
                 graphics.DrawString(personName,font,brush,r.Left, r.Top);
             }
             else
             {
-                // Otherwise, just annotate the unrecognized face in magenta
+                // それ以外の場合は、認識されない顔をマジェンタで注釈をつける
                 graphics.DrawRectangle(penNo, rect);
             }
         }
 
-        // Save annotated image
+        // 注釈付き画像を保存する
         String output_file = "recognized_faces.jpg";
         image.Save(output_file);
         Console.WriteLine("Results saved in " + output_file);   
@@ -791,19 +791,19 @@ using (var imageData = File.OpenRead(imageFile))
 **Python**
 
 ```Python
-# Detect faces in the image
+# 画像から顔を検出する
 with open(image_file, mode="rb") as image_data:
 
-    # Get faces
+    # 顔を取得する
     detected_faces = face_client.face.detect_with_stream(image=image_data)
 
-    # Get a list of face IDs
+    # 顔 ID の一覧を取得する
     face_ids = list(map(lambda face: face.face_id, detected_faces))
 
-    # Identify the faces in the people group
+    # ユーザー グループ内の顔を特定する
     recognized_faces = face_client.face.identify(face_ids, group_id)
 
-    # Get names for recognized faces
+    # 認識された顔の名前を取得する
     face_names = {}
     if len(recognized_faces) > 0:
         print(len(recognized_faces), 'faces recognized.')
@@ -812,7 +812,7 @@ with open(image_file, mode="rb") as image_data:
             print('-', person_name)
             face_names[face.face_id] = person_name
 
-    # Annotate faces in image
+    # 画像の中の顔に注釈をつける
     fig = plt.figure(figsize=(8, 6))
     plt.axis('off')
     image = Image.open(image_file)
@@ -822,15 +822,15 @@ with open(image_file, mode="rb") as image_data:
         bounding_box = ((r.left, r.top), (r.left + r.width, r.top + r.height))
         draw = ImageDraw.Draw(image)
         if face.face_id in face_names:
-            # If the face is recognized, annotate in green with the name
+            # 顔が認識されると、名前に緑で注釈をつける
             draw.rectangle(bounding_box, outline='lightgreen', width=3)
             plt.annotate(face_names[face.face_id],
                         (r.left, r.top + r.height + 15), backgroundcolor='white')
         else:
-            # Otherwise, just annotate the unrecognized face in magenta
+            # それ以外の場合は、認識されない顔をマジェンタで注釈をつける
             draw.rectangle(bounding_box, outline='magenta', width=3)
 
-    # Save annotated image
+    # 注釈付き画像を保存する
     plt.imshow(image)
     outputfile = 'recognized_faces.jpg'
     fig.savefig(outputfile)
@@ -863,12 +863,12 @@ python analyze-faces.py
 顔認識は、身元の確認によく使用されます。Face サービスを使用すると、画像内の顔を別の顔と比較したり、**PersonGroup** に登録されている人物から確認したりできます。
 
 1. アプリケーションのコードファイルの **Main** 関数で、ユーザーがメニュー オプション **5** を選択した場合に実行されるコードを調べます。このコードは **VerifyFace** 関数を呼び出し、画像ファイル (**person1.jpg**) へのパスと、顔の識別に使用される **PeopleGroup** の ID を渡します。
-2. コード ファイルで **VerifyFace** 関数を見付け、コメント **「Get the ID of the person from the people group」** の下 (結果を出力するコードの上) に次のコードを追加します。
+2. コード ファイルで **VerifyFace** 関数を見付け、コメント **「ユーザー グループからユーザー ID を取得する」** の下 (結果を出力するコードの上) に次のコードを追加します。
 
 **C#**
 
 ```C
-// Get the ID of the person from the people group
+// ユーザー グループからユーザー ID を取得する
 var people = await faceClient.PersonGroupPerson.ListAsync(groupId);
 foreach(var person in people)
 {
@@ -876,7 +876,7 @@ foreach(var person in people)
     {
         Guid personId = person.PersonId;
 
-        // Get the first face in the image
+        // 画像の最初の顔を取得する
         using (var imageData = File.OpenRead(personImage))
         {    
             var faces = await faceClient.Face.DetectWithStreamAsync(imageData);
@@ -884,7 +884,7 @@ foreach(var person in people)
             {
                 Guid faceId = (Guid)faces[0].FaceId;
 
-                //We have a face and an ID. Do they match?
+                //顔と ID があります。一致しますか?
                 var verification = await faceClient.Face.VerifyFaceToPersonAsync(faceId, personId, groupId);
                 if (verification.IsIdentical)
                 {
@@ -899,19 +899,19 @@ foreach(var person in people)
 **Python**
 
 ```Python
-# Get the ID of the person from the people group
+# ユーザー グループからユーザー ID を取得する
 people = face_client.person_group_person.list(group_id)
 for person in people:
     if person.name == person_name:
         person_id = person.person_id
 
-        # Get the first face in the image
+        # 画像の最初の顔を取得する
         with open(person_image, mode="rb") as image_data:
             faces = face_client.face.detect_with_stream(image=image_data)
             if len(faces) > 0:
                 face_id = faces[0].face_id
 
-                # We have a face and an ID. Do they match?
+                # 顔と ID があります。一致しますか?
                 verification = face_client.face.verify_face_to_person(face_id, person_id, group_id)
                 if verification.is_identical:
                     result = 'Verified'

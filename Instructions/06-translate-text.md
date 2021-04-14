@@ -82,14 +82,14 @@ Translator サービスは、翻訳されるテキストのソース言語を自
     **C#**
     
     ```C
-    // Use the Translator detect function
+    // Translator detect 関数を使用する
     object[] body = new object[] { new { Text = text } };
     var requestBody = JsonConvert.SerializeObject(body);
     using (var client = new HttpClient())
     {
         using (var request = new HttpRequestMessage())
         {
-            // Build the request
+            // 要求を作成する
             string path = "/detect?api-version=3.0";
             request.Method = HttpMethod.Post;
             request.RequestUri = new Uri(translatorEndpoint + path);
@@ -97,12 +97,12 @@ Translator サービスは、翻訳されるテキストのソース言語を自
             request.Headers.Add("Ocp-Apim-Subscription-Key", cogSvcKey);
             request.Headers.Add("Ocp-Apim-Subscription-Region", cogSvcRegion);
     
-            // Send the request and get response
+            // 要求を送信して応答を読み取る
             HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
-            // Read response as a string
+            // 文字列として応答を読み込む
             string responseContent = await response.Content.ReadAsStringAsync();
     
-            // Parse JSON array and get language
+            // JSON 解析して言語を取得する
             JArray jsonResponse = JArray.Parse(responseContent);
             language = (string)jsonResponse[0]["language"]; 
         }
@@ -112,11 +112,11 @@ Translator サービスは、翻訳されるテキストのソース言語を自
     **Python**
 
     ```Python
-    # Use the Translator detect function
+    # Translator detect 関数を使用する
     path = '/detect'
     url = translator_endpoint + path
     
-    # Build the request
+    # 要求を作成する
     params = {
         'api-version': '3.0'
     }
@@ -131,11 +131,11 @@ Translator サービスは、翻訳されるテキストのソース言語を自
         'text': text
     }]
     
-    # Send the request and get response
+    # 要求を送信して応答を読み取る
     request = requests.post(url, params=params, headers=headers, json=body)
     response = request.json()
     
-    # Parse JSON array and get language
+    # JSON 解析して言語を取得する
     language = response[0]["language"]
     ```
 
@@ -160,19 +160,19 @@ Translator サービスは、翻訳されるテキストのソース言語を自
 アプリケーションがレビューの作成言語を判別できるようになったので、Translator サービスを使用して、英語以外のレビューを英語に翻訳できます。
 
 1. コード ファイルで、現在すべてのテキスト値に対して空の文字列を返す **Translate** 関数を見つけます。
-2. **Translate** 関数のコメント **「Use the Translator translate function」** の下に、次のコードを追加して、Translator の REST API を使用し、指定されたテキストをソース言語から英語に翻訳します。関数の最後にあるコードを置き換えないように注意してください。
+2. **Translate** 関数のコメント **「Translator translate 関数を使用する」** の下に、次のコードを追加して、Translator の REST API を使用し、指定されたテキストをソース言語から英語に翻訳します。関数の最後にあるコードを置き換えないように注意してください。
 
     **C#**
 
     ```C
-    // Use the Translator translate function
+    // Translator translate 関数を使用する
     object[] body = new object[] { new { Text = text } };
     var requestBody = JsonConvert.SerializeObject(body);
     using (var client = new HttpClient())
     {
         using (var request = new HttpRequestMessage())
         {
-            // Build the request
+            // 要求を作成する
             string path = "/translate?api-version=3.0&from=" + sourceLanguage + "&to=en" ;
             request.Method = HttpMethod.Post;
             request.RequestUri = new Uri(translatorEndpoint + path);
@@ -180,12 +180,12 @@ Translator サービスは、翻訳されるテキストのソース言語を自
             request.Headers.Add("Ocp-Apim-Subscription-Key", cogSvcKey);
             request.Headers.Add("Ocp-Apim-Subscription-Region", cogSvcRegion);
     
-            // Send the request and get response
+            // 要求を送信して応答を読み取る
             HttpResponseMessage response = await client.SendAsync(request).ConfigureAwait(false);
-            // Read response as a string
+            // 文字列として応答を読み込む
             string responseContent = await response.Content.ReadAsStringAsync();
     
-            // Parse JSON array and get translation
+            // JSON アレイを解析して翻訳を取得する
             JArray jsonResponse = JArray.Parse(responseContent);
             translation = (string)jsonResponse[0]["translations"][0]["text"];  
         }
@@ -195,11 +195,11 @@ Translator サービスは、翻訳されるテキストのソース言語を自
     **Python**
     
     ```Python
-    # Use the Translator translate function
+    # Translator translate 関数を使用する
     path = '/translate'
     url = translator_endpoint + path
     
-    # Build the request
+    # 要求を作成する
     params = {
         'api-version': '3.0',
         'from': source_language,
@@ -216,11 +216,11 @@ Translator サービスは、翻訳されるテキストのソース言語を自
         'text': text
     }]
     
-    # Send the request and get response
+    # 要求を送信して応答を読み取る
     request = requests.post(url, params=params, headers=headers, json=body)
     response = request.json()
     
-    # Parse JSON array and get translation
+    # JSON アレイを解析して翻訳を取得する
     translation = response [0] ["translations"] [0 ] ["text"]
     ```
 

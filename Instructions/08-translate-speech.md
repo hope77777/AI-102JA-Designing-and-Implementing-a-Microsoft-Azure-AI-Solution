@@ -72,7 +72,7 @@ lab:
     **C#**
     
     ```C#
-    // Import namespaces
+    // 名前空間をインポートする
     using Microsoft.CognitiveServices.Speech;
     using Microsoft.CognitiveServices.Speech.Audio;
     using Microsoft.CognitiveServices.Speech.Translation;
@@ -81,16 +81,16 @@ lab:
     **Python**
     
     ```Python
-    # Import namespaces
+    # 名前空間をインポートする
     import azure.cognitiveservices.speech as speech_sdk
     ```
 
-5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。これらの変数を使用して、音声入力の翻訳に使用する Cognitive Services リソースの **SpeechTranslationConfig** を作成する必要があります。コメント **「Configure translation」** の下に次のコードを追加します。
+5. **Main** 関数では、構成ファイルから Cognitive Services のキーとリージョンをロードするコードがすでに提供されていることに注意してください。これらの変数を使用して、音声入力の翻訳に使用する Cognitive Services リソースの **SpeechTranslationConfig** を作成する必要があります。コメント **「翻訳を構成する」** の下に次のコードを追加します。
 
     **C#**
     
     ```C#
-    // Configure translation
+    // 翻訳を構成する
     translationConfig = SpeechTranslationConfig.FromSubscription(cogSvcKey, cogSvcRegion);
     translationConfig.SpeechRecognitionLanguage = "ja-jp";
     translationConfig.AddTargetLanguage("fr");
@@ -102,7 +102,7 @@ lab:
     **Python**
     
     ```Python
-    # Configure translation
+    # 翻訳を構成する
     translation_config = speech_sdk.translation.SpeechTranslationConfig(cog_key, cog_region)
     translation_config.speech_recognition_language = 'ja-jp'
     translation_config.add_target_language('fr')
@@ -111,19 +111,19 @@ lab:
     print('Ready to translate from',translation_config.speech_recognition_language)
     ```
 
-6. **SpeechTranslationConfig** を使用して音声をテキストに翻訳しますが、**SpeechConfig** を使用して翻訳を音声に合成します。コメント **「Configure speech」** の下に次のコードを追加します。
+6. **SpeechTranslationConfig** を使用して音声をテキストに翻訳しますが、**SpeechConfig** を使用して翻訳を音声に合成します。コメント **「音声を認識する」** の下に次のコードを追加します。
 
     **C#**
     
     ```C#
-    // Configure speech
+    // 音声を認識する
     speechConfig = SpeechConfig.FromSubscription(cogSvcKey, cogSvcRegion);
     ```
     
     **Python**
     
     ```Python
-    # Configure speech
+    # 音声を認識する
     speech_config = speech_sdk.SpeechConfig(cog_key, cog_region)
     ```
 
@@ -148,14 +148,14 @@ lab:
 認知サービス リソースに音声サービス用の **SpeechTranslationConfig** が用意されたので、**Speech translation** APIを使用して音声を認識および翻訳できます。
 
 1. プログラムの **Main** 関数で、コードが **Translate** 関数を使用して音声入力を翻訳していることに注意してください。
-2. **Translate** 関数のコメント **「Translate speech」** の下に、次のコードを追加して、入力にデフォルトのシステムマイクを使用して音声を認識および翻訳するために使用できる **TranslationRecognizer** クライアントを作成します。
+2. **Translate** 関数のコメント **「音声を翻訳する」** の下に、次のコードを追加して、入力にデフォルトのシステムマイクを使用して音声を認識および翻訳するために使用できる **TranslationRecognizer** クライアントを作成します。
 
     > **注**: *ファイル パスを参照するように **AudioConfig** オブジェクトを変更することにより、オーディオ ファイルからの音声入力を翻訳することもできます。*
 
     **C#**
     
     ```C#
-    // Translate speech
+    // 音声を翻訳する
     using AudioConfig audioConfig = AudioConfig.FromDefaultMicrophoneInput();
     using TranslationRecognizer translator = new TranslationRecognizer(translationConfig, audioConfig);
     Console.WriteLine("Speak now...");
@@ -169,7 +169,7 @@ lab:
     **Python**
     
     ```Python
-    # Translate speech
+    # 音声を翻訳する
     audio_config = speech_sdk.AudioConfig(use_default_microphone=True)
     translator = speech_sdk.translation.TranslationRecognizer(translation_config, audio_config)
     print("Speak now...")
@@ -205,12 +205,12 @@ lab:
 
 これまでのところ、アプリケーションは音声入力をテキストに翻訳します。旅行中に誰かに助けを求める必要がある場合は、これで十分かもしれません。ただし、適切な声で翻訳を声に出して話してもらう方がよいでしょう。
 
-1. **Translate** 機能では、コメント **「Synthesize translation」** の下に次のコードを追加して、デフォルトのスピーカーから音声として翻訳を合成するために **SpeechSynthesizer** クライアントを使用します。
+1. **Translate** 機能では、コメント **「翻訳を合成する」** の下に次のコードを追加して、デフォルトのスピーカーから音声として翻訳を合成するために **SpeechSynthesizer** クライアントを使用します。
 
     **C#**
     
     ```C#
-    // Synthesize translation
+    // 翻訳を合成する
     var voices = new Dictionary<string, string>
                     {
                         ["fr"] = "fr-FR-Julie",
@@ -229,7 +229,7 @@ lab:
     **Python**
     
     ```Python
-    # Synthesize translation
+    # 翻訳を合成する
     voices = {
             "fr": "fr-FR-Julie",
             "es": "es-ES-Laura",
