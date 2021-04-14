@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Language Understanding アプリの作成'
     module: 'モジュール 5 - Language Understanding ソリューションの作成'

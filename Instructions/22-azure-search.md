@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Azure Cognitive Search ソリューションの作成'
     module: 'モジュール 12 - ナレッジ マイニング ソリューションの作成'

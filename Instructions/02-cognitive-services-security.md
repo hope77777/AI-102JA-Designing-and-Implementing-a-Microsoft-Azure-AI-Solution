@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Cognitive Services セキュリティの管理'
     module: 'モジュール 2 - Cognitive Services を使用した AI アプリの開発'

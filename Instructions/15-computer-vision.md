@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Computer Vision を使用する画像の分析'
     module: 'モジュール 8 - Computer Vision の概要'

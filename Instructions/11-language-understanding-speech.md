@@ -1,4 +1,4 @@
-﻿---
+---
 lab:
     title: 'Speech および Language Understanding サービスの使用'
     module: 'モジュール 5 - Language Understanding ソリューションの作成'
