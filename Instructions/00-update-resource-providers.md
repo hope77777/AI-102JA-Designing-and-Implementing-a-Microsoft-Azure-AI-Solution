@@ -20,6 +20,6 @@ Azure サブスクリプションに登録する必要のあるリソース プ�
     - Microsoft.Storage
     - Microsoft.CognitiveServices
     - Microsoft.AlertsManagement
-    - microsoft.insights
+    - Microsoft.Insights
     - Microsoft.KeyVault
     - Microsoft.ContainerInstance
